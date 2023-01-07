@@ -9,6 +9,8 @@
  * for nuxt3... it should really remove .nuxt and .output
  * Maybe look at changing it
  *
+ * deploy/
+ *
  */
 const dir = 'dist';//or from env variable? perhaps or from args
 import * as ghpages from 'gh-pages'
