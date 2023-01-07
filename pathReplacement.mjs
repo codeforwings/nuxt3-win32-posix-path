@@ -1,12 +1,16 @@
 /**
  * Try something like spaces
+ * should remove quotes from start and fnish
  * @param inPathWin32
  * @return {*}
  */
 export function pathWin32ToPosix(inPathWin32){
   return inPathWin32.trim()
     .replace(/\\/g,"/")// \ to /
-    .replace(/ /g,"\\ ") ;
+    .replace(/ /g,"\\ ")
+    .replace(/^["']/,'')
+    .replace(/["']$/,'')
+  ;
 
   /* might be a good idea to add quotes, but only for coding in gitbash on windows */
   // return "'" + inPathWin32.trim()
@@ -19,7 +23,7 @@ export function pathPosixToWin32(inPathPosix,sQuote="'"){
   const win32Path = inPathPosix.trim()
     .replace(/\//g,"\\")
     // .replace(/ /g,"\\ ") ;
-    .replace(/\\ /g," ") ;
+    .replace(/\\ /g," ")
   ;
   return / /.test(win32Path) ? `${sQuote}${win32Path}${sQuote}` : win32Path;
 }
