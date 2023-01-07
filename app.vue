@@ -22,15 +22,15 @@
   </div>
 </template>
 <script>
-import {pathWin32ToPosix} from "~/pathReplacement.mjs";
-import {win32Tests} from "~/dev/nodePathTestExamples.mjs";
+import {pathPosixToWin32, pathWin32ToPosix} from "~/pathReplacement.mjs";
+import {posixTests, win32Tests} from "~/dev/nodePathTestExamples.mjs";
 
 export default {
   name:'app',
   data() {
     return {
       sInputWin32: win32Tests.map(val => val.input).join('\n'),
-      sInputPosix: win32Tests.map(val => val.expected).join('\n'),
+      sInputPosix: posixTests.map(val => val.input).join('\n'),
 
     }
   },
@@ -43,7 +43,9 @@ export default {
       }).join('\n')
     },
     sOutputPosixToWin32() {
-      return this.sInputPosix
+      return this.sInputPosix.split('\n').map( val =>{
+        return pathPosixToWin32(val);
+      }).join('\n')
     },
   },
 }

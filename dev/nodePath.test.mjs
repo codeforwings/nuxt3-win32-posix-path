@@ -79,7 +79,7 @@ function writeToFile(fileName,data,space=2){
 import {posix,win32} from 'node:path'
 
 import {pathWin32ToPosix,pathPosixToWin32} from "../pathReplacement.mjs"
-import {win32Tests} from "./nodePathTestExamples.mjs";
+import {posixTests, win32Tests} from "./nodePathTestExamples.mjs";
 
 /**
  * mobaxterm is /drives/c or cd c:/
@@ -110,10 +110,10 @@ describe('nodePath.test.mjs', function(){
   });
   it('Path tests from posix', function(){
     //assert.strictEqual(1,1);//require assert
-    for (const test of win32Tests) {
+    for (const test of posixTests) {
       const {input,expected} = test;
-      let out = pathPosixToWin32(expected);
-      assert.strictEqual(out,input);
+      let out = pathPosixToWin32(input);
+      assert.strictEqual(out,expected);
     }
   });
   it('regexp with slash', function(){
