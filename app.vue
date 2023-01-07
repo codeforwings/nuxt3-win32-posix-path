@@ -21,6 +21,8 @@
   </div>
 </template>
 <script>
+import {pathWin32ToPosix} from "~/pathReplacement.mjs";
+
 export default {
   name:'app',
   data() {
@@ -35,7 +37,7 @@ export default {
 
       return this.sInputWin32.split('\n').map( val =>{
 
-        return val;
+        return pathWin32ToPosix(val);
       }).join('\n')
     },
     sOutputPosixToWin32() {

@@ -75,12 +75,11 @@ function writeToFile(fileName,data,space=2){
 /**
  * Test Class "C"
  */
-function C(input,expected) {
-  return {input,expected}
-}
+
 import {posix,win32} from 'node:path'
 
 import {pathWin32ToPosix,pathPosixToWin32} from "../pathReplacement.mjs"
+import {win32Tests} from "./nodePathTestExamples.mjs";
 
 /**
  * mobaxterm is /drives/c or cd c:/
@@ -88,34 +87,13 @@ import {pathWin32ToPosix,pathPosixToWin32} from "../pathReplacement.mjs"
  * so c:/ is good enough
  */
 describe('nodePath.test.mjs', function(){
-  /**
-   * Tests can be reversed for testing
-   * @type {{input, expected}[]}
-   */
-  const win32Tests = [
-    C(
-      // String.raw`C:\Users\Administrator\OneDrive\Documents\2022\someMD.md`,//doesnt work,1
-      "C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
-      'C:/Users/Jason/OneDrive/Documents/2022/someMD.md'
-    ),
-    /* directory */
-    C(
-      "C:\\Users\\Jason\\OneDrive\\Documents\\2022",
-      "C:/Users/Jason/OneDrive/Documents/2022"
-    ),
-    C(
-      "C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty",
-      "C:/Users/Jason/OneDrive\ -\ Code\ for\ Wings/rick\ and\ morty"//test might not work in reverse
-      // "C:/Users/Jason/OneDrive - Code for Wings/rick and morty"//test might not work in reverse. but it does
-    )
-  ];
-  /* posix to win32 */
+
 
 
   it('Sep from posix and win32', function(){
     //assert.strictEqual(1,1);//require assert
-    console.log(posix.sep);// /
-    console.log(win32.sep);//\
+    // console.log(posix.sep);// /
+    // console.log(win32.sep);//\
     assert.strictEqual(posix.sep, '/');
     assert.strictEqual(win32.sep, '\\');
     // assert.strictEqual(win32.sep, String.raw`\\`[0]);//interesting doesnt work if it's only one slash
