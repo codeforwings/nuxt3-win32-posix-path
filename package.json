@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "gh-pages-deploy": "gh-pages --dotfiles --dist dist",
-    "testPathSep": "node dev/printSep.dev.mjs"
+    "testPathSep": "node dev/printSep.dev.mjs",
+    "ghGenerateAndDeploy": "node deploy/ghPagesDeploy.mjs"
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
