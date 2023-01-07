@@ -18,8 +18,10 @@ export const win32Tests = [
   ),
   C(
     "C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty",
-    "C:/Users/Jason/OneDrive\ -\ Code\ for\ Wings/rick\ and\ morty"//test might not work in reverse
+    "C:/Users/Jason/OneDrive\\ -\\ Code\\ for\\ Wings/rick\\ and\\ morty"//test might not work in reverse
     // "C:/Users/Jason/OneDrive - Code for Wings/rick and morty"//test might not work in reverse. but it does
   )
+  // for windows expected, single / double quote if there are spaces
+  // 'C:\Users\Jason\OneDrive - Code for Wings'
 ];
 /* posix to win32 */

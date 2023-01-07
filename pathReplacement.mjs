@@ -4,7 +4,10 @@
  * @return {*}
  */
 export function pathWin32ToPosix(inPathWin32){
-  return inPathWin32.replace(/\\/g,"/");
+  return inPathWin32.trim()
+    .replace(/\\/g,"/")// \ to /
+    .replace(/ /g,"\\ ")
+    ;
 }
 export function pathPosixToWin32(inPathPosix){
   return inPathPosix.replace(/\//g,"\\");
