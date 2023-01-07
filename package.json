@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "gh-pages-deploy": "gh-pages --dotfiles --dist dist"
+    "gh-pages-deploy": "gh-pages --dotfiles --dist dist",
+    "testPathSep": "node dev/printSep.dev.mjs"
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",

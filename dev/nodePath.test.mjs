@@ -76,7 +76,7 @@ function writeToFile(fileName,data,space=2){
  * Test Class "C"
  */
 
-import {posix,win32} from 'node:path'
+import {posix,win32,sep} from 'node:path'
 
 import {pathWin32ToPosix,pathPosixToWin32} from "../pathReplacement.mjs"
 import {posixTests, win32Tests} from "./nodePathTestExamples.mjs";
@@ -127,4 +127,7 @@ describe('nodePath.test.mjs', function(){
     reg = new RegExp(String.raw`\\`,'g');
     assert.deepEqual(reg,/\\/g);
   });
+  it('node path sep from windows machine',function(){
+    assert.strictEqual(sep,"\\")
+  })
 });
