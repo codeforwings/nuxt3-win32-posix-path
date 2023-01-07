@@ -1,4 +1,6 @@
 {
+  "author": "hychan48",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "build": "nuxt build",
