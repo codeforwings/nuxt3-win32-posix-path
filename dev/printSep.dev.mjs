@@ -6,3 +6,4 @@ import assert from 'node:assert';
 
 /* This will be run from linux */
 assert.strictEqual(sep,"/");
+console.log('Done')
