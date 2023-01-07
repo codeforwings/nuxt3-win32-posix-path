@@ -105,7 +105,7 @@ describe('nodePath.test.mjs', function(){
     ),
     C(
       "C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty",
-      ""
+      "C:/Users/Jason/OneDrive - Code for Wings/rick and morty"
     )
   ];
   /* posix to win32 */
