@@ -105,7 +105,8 @@ describe('nodePath.test.mjs', function(){
     ),
     C(
       "C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty",
-      "C:/Users/Jason/OneDrive - Code for Wings/rick and morty"
+      "C:/Users/Jason/OneDrive\ -\ Code\ for\ Wings/rick\ and\ morty"//test might not work in reverse
+      // "C:/Users/Jason/OneDrive - Code for Wings/rick and morty"//test might not work in reverse. but it does
     )
   ];
   /* posix to win32 */
