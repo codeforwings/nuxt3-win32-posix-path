@@ -6,6 +6,9 @@
  *
  * make sure this file is run as root
  *
+ * for nuxt3... it should really remove .nuxt and .output
+ * Maybe look at changing it
+ *
  */
 const dir = 'dist';//or from env variable? perhaps or from args
 import * as ghpages from 'gh-pages'
