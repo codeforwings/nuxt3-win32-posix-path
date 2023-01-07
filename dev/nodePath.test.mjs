@@ -79,15 +79,73 @@ function C(input,expected) {
   return {input,expected}
 }
 import {posix,win32} from 'node:path'
+
+import {pathWin32ToPosix,pathPosixToWin32} from "../pathReplacement.mjs"
+
+/**
+ * mobaxterm is /drives/c or cd c:/
+ * c:/ also works in git bash
+ * so c:/ is good enough
+ */
 describe('nodePath.test.mjs', function(){
-  const tests = [
+  /**
+   * Tests can be reversed for testing
+   * @type {{input, expected}[]}
+   */
+  const win32Tests = [
     C(
-      String.raw`C:\Users\Administrator\OneDrive\Documents\2022\someMD.md`,
+      // String.raw`C:\Users\Administrator\OneDrive\Documents\2022\someMD.md`,//doesnt work,1
+      "C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
+      'C:/Users/Jason/OneDrive/Documents/2022/someMD.md'
+    ),
+    /* directory */
+    C(
+      "C:\\Users\\Jason\\OneDrive\\Documents\\2022",
+      "C:/Users/Jason/OneDrive/Documents/2022"
+    ),
+    C(
+      "C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty",
+      ""
     )
   ];
+  /* posix to win32 */
+
+
+  it('Sep from posix and win32', function(){
+    //assert.strictEqual(1,1);//require assert
+    console.log(posix.sep);// /
+    console.log(win32.sep);//\
+    assert.strictEqual(posix.sep, '/');
+    assert.strictEqual(win32.sep, '\\');
+    // assert.strictEqual(win32.sep, String.raw`\\`[0]);//interesting doesnt work if it's only one slash
+    assert.strictEqual(win32.sep, String.raw`\\`[0]);//interesting doesnt work if it's only one slash
+
+  });
   it('Path tests from windows', function(){
     //assert.strictEqual(1,1);//require assert
-    console.log(posix.sep);
+    for (const test of win32Tests) {
+      const {input,expected} = test;
+      let out = pathWin32ToPosix(input);
+      assert.strictEqual(out,expected)
+    }
+  });
+  it('Path tests from posix', function(){
+    //assert.strictEqual(1,1);//require assert
+    for (const test of win32Tests) {
+      const {input,expected} = test;
+      let out = pathPosixToWin32(expected);
+      assert.strictEqual(out,input);
+    }
+  });
+  it('regexp with slash', function(){
+    //assert.strictEqual(1,1);//require assert
+    let reg = new RegExp('s','g');
+    assert.deepEqual(reg,/s/g)
+    // const reg = new RegExp('\\/','g');
+    reg = new RegExp("\\\\",'g');
+    assert.deepEqual(reg,/\\/g);
 
+    reg = new RegExp(String.raw`\\`,'g');
+    assert.deepEqual(reg,/\\/g);
   });
 });
