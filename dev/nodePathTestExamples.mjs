@@ -24,7 +24,7 @@ export const win32Tests = [
   // for windows expected, single / double quote if there are spaces
   // 'C:\Users\Jason\OneDrive - Code for Wings'
 ];
-/* posix to win32 */
+/* posix to win32 todo */
 export const posixTests = [
   C(
     // String.raw`C:\Users\Administrator\OneDrive\Documents\2022\someMD.md`,//doesnt work,1
@@ -43,4 +43,5 @@ export const posixTests = [
   )
   // for windows expected, single / double quote if there are spaces
   // 'C:\Users\Jason\OneDrive - Code for Wings'
+  // add some random examples for ubuntu related stuff
 ];
