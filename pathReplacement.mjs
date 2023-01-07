@@ -9,3 +9,4 @@ export function pathWin32ToPosix(inPathWin32){
 export function pathPosixToWin32(inPathPosix){
   return inPathPosix.replace(/\//g,"\\");
 }
+export default {pathWin32ToPosix}
