@@ -1,5 +1,6 @@
 /**
- * pnp
+ * NODE_ENV=development pnpm install
+ * pnpm run testPathSep
  */
 import {sep} from "node:path";
 import assert from 'node:assert';
