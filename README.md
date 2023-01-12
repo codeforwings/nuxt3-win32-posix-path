@@ -1,5 +1,7 @@
 # Nuxt 3 Minimal Starter
 
+[Github Pages Deployment](https://codeforwings.github.io/nuxt3-win32-posix-path/)
+
 # Replacement Scripts
 ```js
 inPathWin32.replace(/\\/g,"/");
