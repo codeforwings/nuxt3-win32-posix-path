@@ -7,3 +7,5 @@ node_modules
 .env
 dist
 .idea
+/docs/.vitepress/cache/
+/docs/.vitepress/dist/

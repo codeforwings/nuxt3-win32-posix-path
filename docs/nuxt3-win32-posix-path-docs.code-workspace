@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.eol": "\n",//lf vs crlf
+		"editor.insertSpaces": true,//use spaces instead of tabs
+    "[markdown]": {
+      "editor.tabSize": 2
+    }
+	}
+}
