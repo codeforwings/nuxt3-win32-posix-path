@@ -20,6 +20,7 @@
 * pnpm
 * [ ] edit links
 * [ ] pandoc export
+* [ ] glob cheatsheet
 
 
 
@@ -36,7 +37,8 @@ Notes
 # Config
 * config.js
   * themeConfig
-    * nav  
+    * nav
+      * added src/
     * sidebar (navigation)
 ## Sidebar Plugin
 [https://github.com/JonathanSchndr/vitepress-plugin-auto-sidebar](https://github.com/JonathanSchndr/vitepress-plugin-auto-sidebar)

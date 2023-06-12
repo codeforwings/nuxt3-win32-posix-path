@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  vitepress-plugin-auto-sidebar:
+    specifier: ^1.0.7
+    version: 1.0.7
+
 devDependencies:
   gh-pages:
     specifier: ^4.0.0
@@ -5560,6 +5565,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /vitepress-plugin-auto-sidebar@1.0.7:
+    resolution: {integrity: sha512-W26pdwwI2tGrghOW+8L8j2e1L4yxVAgg8IgD1ZpMJOxnm88IUIXZnHGekEnpmUOWnV/8F5isUHkXk5TNloRq2g==}
+    engines: {node: ^14.13.1 || ^16.7.0 || >=18}
+    dev: false
 
   /vitepress@1.0.0-beta.2(@algolia/client-search@4.17.2)(search-insights@2.6.0):
     resolution: {integrity: sha512-DBXYjtYbm3W1IPPJ2TiCaK/XK+o/2XmL2+jslOGKm+txcbmG0kbeB+vadC5tCUZA9NdA+9Ywj3M4548c7t/SDg==}
