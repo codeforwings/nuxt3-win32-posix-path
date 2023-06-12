@@ -42,6 +42,9 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     // plugin for this?
+    search: {
+      provider: 'local'
+    },
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Examples', link: '/markdown-examples' }
@@ -55,9 +58,10 @@ export default defineConfig({
         items: [
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' },
+          { text: 'Readme Vite Press', link: '/readme_vite_press' },
         ]
       },
-      ...sidebarPlugin,
+      ...sidebarPlugin,//defn need some plugin
     ],
 
     socialLinks: [

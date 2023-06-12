@@ -4,7 +4,9 @@
 
 # Concepts
 * "On this page"
-
+* Edit on GitHub 
+  * `/edit/ to /tree/`
+    * to view
 
 # Things to do
 * [x] .gitignore
@@ -21,6 +23,7 @@
 * [ ] edit links
 * [ ] pandoc export
 * [ ] glob cheatsheet
+* [ ] columns
 
 
 
@@ -33,6 +36,34 @@ Notes
 ```
 # Syntax Highlighting
 [https://github.com/shikijs/shiki/blob/main/docs/languages.md](https://github.com/shikijs/shiki/blob/main/docs/languages.md)
+```js
+console.log('hello world');
+```
+```bash
+echo "hello world"
+```
+```python
+print("hello world")
+```
+```powershell
+Write-Host "hello world"
+```
+```ahk
+#Requires AutoHotkey v2
+; some comment
+MsgBox, hello world
+tooltip("hello world")
+```
+```jsonc
+{
+  "hello": "world"
+}
+```
+```yaml
+hello: 
+  - world
+  - kenobi 
+```
 
 # Config
 * config.js
