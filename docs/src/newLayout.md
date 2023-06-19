@@ -17,6 +17,8 @@ import { ref } from 'vue'
 //why does it work now... wth, did i not import it properly before? the alias doesnt seem to work though
 import HelloWorlds from "../.vitepress/theme/custom/hello-world.vue"
 const count = ref(0)
+
+// https://v3-migration.vuejs.org/breaking-changes/data-option.html
 </script>
 
 ## que
@@ -27,7 +29,11 @@ const count = ref(0)
 
 
 The count is: {{ count }}
-
+<!-- https://vitepress.dev/guide/using-vue -->
+<!-- that's dope -->
+```js-vue
+Count {{ count }}
+```
 <button :class="$style.button" @click="count++">Increment</button>
 
 <style module>
