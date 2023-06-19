@@ -1,5 +1,7 @@
 <script setup lang="js">
 import { ref } from 'vue'
+import { useData } from 'vitepress'
+const { page } = useData()
 
 const count = ref(0)
 </script>
@@ -8,6 +10,8 @@ const count = ref(0)
 <div>
   The count is: {{ count }}<br/>
 <button class="button" @click="count++">Increment</button>
+  <pre>{{ page }}</pre>
+
 </div>
 
 </template>

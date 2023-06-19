@@ -2,6 +2,7 @@
 import { h } from 'vue'
 import Theme from 'vitepress/theme'
 import HelloWorld from "./custom/hello-world.vue";
+// import HelloWorld from "#theme/custom/hello-world.vue";
 import './style.css'
 
 export default {
