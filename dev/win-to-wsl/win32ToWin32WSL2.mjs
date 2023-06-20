@@ -41,7 +41,8 @@ export function win32ToWin32Slash(win32Path){
   let win32Slash;
   /* replace \ with / */
   win32Slash = pathWin32ToPosix(
-    win32Path.replace(/\\\\/g,'\\')
+    win32Path
+
   );
   /* convert Drive letter to /mnt/<lowercase>/ */
   win32Slash = win32Slash.replace(/^([a-zA-Z]):/,(match,p1)=>{
