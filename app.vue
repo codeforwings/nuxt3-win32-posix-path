@@ -61,9 +61,18 @@ export default {
     return {
       sInputWin32: win32Tests.map(val => val.input).join('\n'),
       sInputPosix: posixTests.map(val => val.input).join('\n'),
-      sInputWin32Normal:"C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
+
+      //i believe this is the win32js
+      sInputWin32Normal:          [
+              "C:\\Users\\Public\\Documents",
+              "C:\\\\Users\\\\Public\\\\Documents",
+              "C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
+          ].join('\n'),
       /* */
-      sWin32ToWsl:"C:\\Users\\Public\\Documents",
+      sWin32ToWsl:          [
+              "C:\\Users\\Public\\Documents",
+              "C:\\\\Users\\\\Public\\\\Documents",
+          ].join('\n'),
       sWin32ToSlash:
           [
               "C:\\Users\\Public\\Documents",
