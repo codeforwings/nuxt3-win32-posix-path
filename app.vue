@@ -64,7 +64,11 @@ export default {
       sInputWin32Normal:"C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
       /* */
       sWin32ToWsl:"C:\\Users\\Public\\Documents",
-      sWin32ToSlash:"C:\\Users\\Public\\Documents",
+      sWin32ToSlash:
+          [
+              "C:\\Users\\Public\\Documents",
+              "C:\\\\Users\\\\Public\\\\Documents",
+          ].join('\n'),
     }
   },
   computed: {
