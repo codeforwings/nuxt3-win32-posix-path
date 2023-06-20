@@ -99,9 +99,42 @@ export default {
   },
 }
 </script>
+<!--dark-theme css -->
 <style>
-  .area {
-    min-height: 500px;
+.area {
+    min-height: 100px;
     min-width: 500px;
   }
+
+
+:root {
+  --bg-color: #333;
+  --text-color: white;
+}
+
+.dark-theme {
+  --bg-color: #333;
+  --text-color: white;
+}
+.light-theme {
+  --bg-color: white;
+  --text-color: black;
+}
+
+body,input, textarea {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1, p{
+  margin-bottom: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+}
 </style>
