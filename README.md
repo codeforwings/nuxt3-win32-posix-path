@@ -54,4 +54,5 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 ## Next Steps
 * Migrate UI to VitePress
 * Cleanup and move to src/ and test/ etc.
-
+* For UX, i feel like just convert everything from backslash to slash
+  * then dont have to deal with anything... have to double check spaces

@@ -77,14 +77,16 @@ describe('win32ToWin32JS.test.mjs', function(){
     //assert.strictEqual(1,1);//require assert
     const input = 'C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md'
     let out = win32ToWin32JS(input)
-    console.log(out);
+    assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive\\\\Documents\\\\2022\\\\someMD.md');
+    // console.log(out);
   });
   //todo might need to updaet this
   it('win32ToWin32JS with spaces', function(){
     //assert.strictEqual(1,1);//require assert
     const input = 'C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty'
-    let out = win32ToWin32JS(input)
-    console.log(out);
+    let out = win32ToWin32JS(input)//hmm i think there were quotes though
+    assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive - Code for Wings\\\\rick and morty');
+    // console.log(out);
   });
 
 });

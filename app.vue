@@ -22,7 +22,7 @@
       />
 
       <!--    Win32 Normalized />-->
-      <h1>Win32 to Win32JS mnt</h1>
+      <h1>Win32 to Win32JS</h1>
       <textarea class="area"
         v-model="sInputWin32Normal"
       />
@@ -30,7 +30,7 @@
         :value="sOutputWin32Normal"
       />
       <!--    Win32 wsl />-->
-      <h1>Win32 to Win32 WSL</h1>
+      <h1>Win32 to Win32 WSL mnt</h1>
       <textarea class="area"
         v-model="sWin32ToWsl"
       />
