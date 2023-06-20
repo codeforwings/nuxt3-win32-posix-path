@@ -12,6 +12,7 @@ import {pathWin32ToPosix} from "../../pathReplacement.mjs";
  * @param win32Path {string} - Windows Path - Example: C:\Users\Public\Documents
  * @return {string} - WSL2 Path - Example: /mnt/c/Users/Public/Documents
  * @constructor
+ * todo spaces and quotes
  */
 export function win32ToWin32WSL2(win32Path){
   let wsl2Path;
@@ -33,6 +34,7 @@ export function win32ToWin32WSL2(win32Path){
  * Reusing the same function as wsl... so leaving the drive lowercase
  * @param win32Path
  * @return {string}
+ * todo spaces and quotes
  */
 export function win32ToWin32Slash(win32Path){
   let win32Slash;

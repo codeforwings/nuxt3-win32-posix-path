@@ -29,12 +29,29 @@
       <textarea class="area"
         :value="sOutputWin32Normal"
       />
+      <!--    Win32 wsl />-->
+      <h1>Win32 to Win32 WSL</h1>
+      <textarea class="area"
+        v-model="sWin32ToWsl"
+      />
+      <textarea class="area"
+        :value="sOutputWin32ToWsl"
+      />
+      <!--    Win32 slash />-->
+      <h1>Win32 to Win32 Slash</h1>
+      <textarea class="area"
+        v-model="sWin32ToSlash"
+      />
+      <textarea class="area"
+        :value="sOutputWin32ToSlash"
+      />
   </div>
 </template>
 <script>
 import {pathPosixToWin32, pathWin32ToPosix} from "~/pathReplacement.mjs";
 import {posixTests, win32Tests} from "~/dev/nodePathTestExamples.mjs";
 import {win32ToWin32JS} from "~/dev/win32ToWin32JS.mjs";
+import {win32ToWin32Slash, win32ToWin32WSL2} from "~/dev/win-to-wsl/win32ToWin32WSL2.mjs";
 export default {
   name:'app',
   mounted(){
@@ -45,6 +62,9 @@ export default {
       sInputWin32: win32Tests.map(val => val.input).join('\n'),
       sInputPosix: posixTests.map(val => val.input).join('\n'),
       sInputWin32Normal:"C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
+      /* */
+      sWin32ToWsl:"C:\\Users\\Public\\Documents",
+      sWin32ToSlash:"C:\\Users\\Public\\Documents",
     }
   },
   computed: {
@@ -65,7 +85,17 @@ export default {
         return win32ToWin32JS(val);
       }).join('\n')
     },
-
+    /* */
+    sOutputWin32ToWsl() {
+      return this.sWin32ToWsl.split('\n').map( val =>{
+        return win32ToWin32WSL2(val);
+      }).join('\n')
+    },
+    sOutputWin32ToSlash(){
+      return this.sWin32ToSlash.split('\n').map( val =>{
+        return win32ToWin32Slash(val);
+      }).join('\n')
+    },
   },
 }
 </script>
