@@ -104,6 +104,13 @@ describe('win32ToWin32WSL2.test.mjs', function(){
     //maybe add subprocess to try with cmd and powershell
 
   });
+  it('win32ToWin32Slash cmd double backslash \\\\ powershell', function(){
+    const escapedInput = "C:\\Users\\Public\\Documents";
+    const expectedOutput = "c:/Users/Public/Documents";//case-insensitive, but reusing wsl function
+    let actual
+    actual = win32ToWin32Slash(escapedInput);
+    assert.strictEqual(actual,expectedOutput);
+  });
   /* try with network mount add \\ path to check real quick */
 
   /* todo add more unit tests and try quotes and spaces etc.*/

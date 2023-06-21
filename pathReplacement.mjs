@@ -6,6 +6,7 @@
  */
 export function pathWin32ToPosix(inPathWin32){
   return inPathWin32.trim()
+    .replace(/\\\\/g,'\\')//todo check me... for network unc paths
     .replace(/\\/g,"/")// \ to /
     .replace(/ /g,"\\ ")
     .replace(/^["']/,'')

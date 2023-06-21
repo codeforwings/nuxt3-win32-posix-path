@@ -35,11 +35,15 @@ export function win32ToWin32WSL2(win32Path){
  * @param win32Path
  * @return {string}
  * todo spaces and quotes
+ * assuming valid paths
  */
 export function win32ToWin32Slash(win32Path){
   let win32Slash;
   /* replace \ with / */
-  win32Slash = pathWin32ToPosix(win32Path);
+  win32Slash = pathWin32ToPosix(
+    win32Path
+
+  );
   /* convert Drive letter to /mnt/<lowercase>/ */
   win32Slash = win32Slash.replace(/^([a-zA-Z]):/,(match,p1)=>{
     // console.log(match);//match is C:
