@@ -80,3 +80,10 @@ hello:
 * search
 * vscode setup for markdown
 * BLOCK COMMENTS STILL NOT WORK
+
+# Nice to have
+* add vuetify or something
+* need layout? or use vitepress? 
+1. relative paths
+2. windows to /c/users/kenobi
+3. 

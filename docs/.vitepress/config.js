@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { getSidebar } from 'vitepress-plugin-auto-sidebar'
+import {fileURLToPath, URL} from "node:url";
 // /** @type {import('vitepress')} */
 // let sidebar;
 
@@ -36,6 +37,18 @@ const sidebarPlugin = getSidebar({
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  resolve: {
+    alias: {
+      //https://vitejs.dev/guide/build.html#library-mode
+      '##': fileURLToPath(new URL('./',import.meta.url)),//might want to try # or @ again
+      '#theme': fileURLToPath(new URL('./theme', import.meta.url)),
+    },
+    extensions: [
+      '.js',
+      '.json',
+      '.mjs',
+    ],
+  },
   srcDir: './src',
   title: "Win32 Posix Path Tutorial",
   description: "Cheatsheet, utils, tutorial for OS Paths",

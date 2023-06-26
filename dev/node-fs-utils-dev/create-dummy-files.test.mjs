@@ -64,7 +64,7 @@ this.timeout(500);//500ms
  * @param data will automatically be changed
  */
 import fs from 'node:fs';
-import {win32ToWin32JS} from "./win32ToWin32JS.mjs";
+import {buildNodePath, DummyFiles} from "##/dev/node-fs-utils-dev/create-dummy-files.mjs";
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
   const filePath = `dev/pbs/test/${sFileName}`
@@ -72,28 +72,27 @@ function writeToFile(fileName,data,space=2){
     typeof data === 'string' ? data :JSON.stringify(data,null,+space)
   );
 }
-describe('win32ToWin32JS.test.mjs', function(){
-  it('win32ToWin32JS.mjs', function(){
+describe('create-dummy-files.test.mjs', function(){
+  it('DummyFiles - ensure no blanks', function(){
     //assert.strictEqual(1,1);//require assert
-    const input = 'C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md'
-    let out = win32ToWin32JS(input)
-    assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive\\\\Documents\\\\2022\\\\someMD.md');
-    // console.log(out);
+    assert.strictEqual(DummyFiles.length,10);
+    assert.strictEqual(DummyFiles[0],'/myapp/readme.md');
   });
-  it('win32ToWin32JS.mjs double', function(){
-    //assert.strictEqual(1,1);//require assert
-    const input = 'C:\\\\Users\\\\Jason\\\\OneDrive\\\\Documents\\\\2022\\\\someMD.md'
-    let out = win32ToWin32JS(input)
-    assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive\\\\Documents\\\\2022\\\\someMD.md');
-    // console.log(out);
-  });
-  //todo might need to updaet this
-  it('win32ToWin32JS with spaces', function(){
-    //assert.strictEqual(1,1);//require assert
-    const input = 'C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty'
-    let out = win32ToWin32JS(input)//hmm i think there were quotes though
-    assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive - Code for Wings\\\\rick and morty');
-    // console.log(out);
+  it('buildNodePath', function(){
+    let out ;
+    out =buildNodePath('/myapp/readme.md');
+    assert.strictEqual(out,'/myapp/readme.md');
+
+    out =buildNodePath('.','/myapp/readme.md');
+    assert.strictEqual(out,'myapp/readme.md');
+
+    out =buildNodePath('./','/myapp/readme.md');
+    assert.strictEqual(out,'myapp/readme.md');
+
+    out =buildNodePath('myapp/readme.md');
+    assert.strictEqual(out,'myapp/readme.md')
+    console.log(out);
+
   });
 
 });
