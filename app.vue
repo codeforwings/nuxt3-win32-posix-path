@@ -22,12 +22,28 @@
       />
 
       <!--    Win32 Normalized />-->
-      <h1>Win32 to Win32JS mnt</h1>
+      <h1>Win32 to Win32JS</h1>
       <textarea class="area"
         v-model="sInputWin32Normal"
       />
       <textarea class="area"
         :value="sOutputWin32Normal"
+      />
+      <!--    Win32 wsl />-->
+      <h1>Win32 to Win32 WSL mnt</h1>
+      <textarea class="area"
+        v-model="sWin32ToWsl"
+      />
+      <textarea class="area"
+        :value="sOutputWin32ToWsl"
+      />
+      <!--    Win32 slash />-->
+      <h1>Win32 to Win32 Slash</h1>
+      <textarea class="area"
+        v-model="sWin32ToSlash"
+      />
+      <textarea class="area"
+        :value="sOutputWin32ToSlash"
       />
   </div>
 </template>
@@ -35,6 +51,7 @@
 import {pathPosixToWin32, pathWin32ToPosix} from "~/pathReplacement.mjs";
 import {posixTests, win32Tests} from "~/dev/nodePathTestExamples.mjs";
 import {win32ToWin32JS} from "~/dev/win32ToWin32JS.mjs";
+import {win32ToWin32Slash, win32ToWin32WSL2} from "~/dev/win-to-wsl/win32ToWin32WSL2.mjs";
 export default {
   name:'app',
   mounted(){
@@ -44,7 +61,23 @@ export default {
     return {
       sInputWin32: win32Tests.map(val => val.input).join('\n'),
       sInputPosix: posixTests.map(val => val.input).join('\n'),
-      sInputWin32Normal:"C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
+
+      //i believe this is the win32js
+      sInputWin32Normal:          [
+              "C:\\Users\\Public\\Documents",
+              "C:\\\\Users\\\\Public\\\\Documents",
+              "C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
+          ].join('\n'),
+      /* */
+      sWin32ToWsl:          [
+              "C:\\Users\\Public\\Documents",
+              "C:\\\\Users\\\\Public\\\\Documents",
+          ].join('\n'),
+      sWin32ToSlash:
+          [
+              "C:\\Users\\Public\\Documents",
+              "C:\\\\Users\\\\Public\\\\Documents",
+          ].join('\n'),
     }
   },
   computed: {
@@ -65,13 +98,56 @@ export default {
         return win32ToWin32JS(val);
       }).join('\n')
     },
-
+    /* */
+    sOutputWin32ToWsl() {
+      return this.sWin32ToWsl.split('\n').map( val =>{
+        return win32ToWin32WSL2(val);
+      }).join('\n')
+    },
+    sOutputWin32ToSlash(){
+      return this.sWin32ToSlash.split('\n').map( val =>{
+        return win32ToWin32Slash(val);
+      }).join('\n')
+    },
   },
 }
 </script>
+<!--dark-theme css -->
 <style>
-  .area {
-    min-height: 500px;
+.area {
+    min-height: 100px;
     min-width: 500px;
   }
+
+
+:root {
+  --bg-color: #333;
+  --text-color: white;
+}
+
+.dark-theme {
+  --bg-color: #333;
+  --text-color: white;
+}
+.light-theme {
+  --bg-color: white;
+  --text-color: black;
+}
+
+body,input, textarea {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1, p{
+  margin-bottom: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+}
 </style>

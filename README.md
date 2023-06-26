@@ -1,11 +1,12 @@
 # Nuxt 3 Minimal Starter
 
-[Github Pages Deployment](https://codeforwings.github.io/nuxt3-win32-posix-path/)
+* [GH Page](https://codeforwings.github.io/nuxt3-win32-posix-path/)
+
+* [GH Repo](https://github.com/codeforwings/nuxt3-win32-posix-path/)
 
 # Replacement Scripts
 ```js
 inPathWin32.replace(/\\/g,"/");
-
 ```
 
 
@@ -49,3 +50,9 @@ npm run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Next Steps
+* Migrate UI to VitePress
+* Cleanup and move to src/ and test/ etc.
+* For UX, i feel like just convert everything from backslash to slash
+  * then dont have to deal with anything... have to double check spaces
