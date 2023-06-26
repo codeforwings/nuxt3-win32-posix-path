@@ -64,7 +64,6 @@ this.timeout(500);//500ms
  * @param data will automatically be changed
  */
 import fs from 'node:fs';
-import {win32ToWin32JS} from "./win32ToWin32JS.mjs";
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
   const filePath = `dev/pbs/test/${sFileName}`
@@ -72,28 +71,63 @@ function writeToFile(fileName,data,space=2){
     typeof data === 'string' ? data :JSON.stringify(data,null,+space)
   );
 }
-describe('win32ToWin32JS.test.mjs', function(){
-  it('win32ToWin32JS.mjs', function(){
-    //assert.strictEqual(1,1);//require assert
-    const input = 'C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md'
-    let out = win32ToWin32JS(input)
-    assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive\\\\Documents\\\\2022\\\\someMD.md');
-    // console.log(out);
-  });
-  it('win32ToWin32JS.mjs double', function(){
-    //assert.strictEqual(1,1);//require assert
-    const input = 'C:\\\\Users\\\\Jason\\\\OneDrive\\\\Documents\\\\2022\\\\someMD.md'
-    let out = win32ToWin32JS(input)
-    assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive\\\\Documents\\\\2022\\\\someMD.md');
-    // console.log(out);
-  });
-  //todo might need to updaet this
-  it('win32ToWin32JS with spaces', function(){
-    //assert.strictEqual(1,1);//require assert
-    const input = 'C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty'
-    let out = win32ToWin32JS(input)//hmm i think there were quotes though
-    assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive - Code for Wings\\\\rick and morty');
-    // console.log(out);
-  });
 
+/**
+ * Test Class "C"
+ */
+
+import {posix,win32,sep} from 'node:path'
+
+import {pathWin32ToPosix,pathPosixToWin32} from "../../src/pathReplacement.mjs"
+import {posixTests, win32Tests} from "../../lib/nodePathTestExamples.mjs";
+
+/**
+ * mobaxterm is /drives/c or cd c:/
+ * c:/ also works in git bash
+ * so c:/ is good enough
+ */
+describe('nodePath.test.mjs', function(){
+
+
+
+  it('Sep from posix and win32', function(){
+    //assert.strictEqual(1,1);//require assert
+    // console.log(posix.sep);// /
+    // console.log(win32.sep);//\
+    assert.strictEqual(posix.sep, '/');
+    assert.strictEqual(win32.sep, '\\');
+    // assert.strictEqual(win32.sep, String.raw`\\`[0]);//interesting doesnt work if it's only one slash
+    assert.strictEqual(win32.sep, String.raw`\\`[0]);//interesting doesnt work if it's only one slash
+
+  });
+  it('Path tests from windows', function(){
+    //assert.strictEqual(1,1);//require assert
+    for (const test of win32Tests) {
+      const {input,expected} = test;
+      let out = pathWin32ToPosix(input);
+      assert.strictEqual(out,expected)
+    }
+  });
+  it('Path tests from posix', function(){
+    //assert.strictEqual(1,1);//require assert
+    for (const test of posixTests) {
+      const {input,expected} = test;
+      let out = pathPosixToWin32(input);
+      assert.strictEqual(out,expected);
+    }
+  });
+  it('regexp with slash', function(){
+    //assert.strictEqual(1,1);//require assert
+    let reg = new RegExp('s','g');
+    assert.deepEqual(reg,/s/g)
+    // const reg = new RegExp('\\/','g');
+    reg = new RegExp("\\\\",'g');
+    assert.deepEqual(reg,/\\/g);
+
+    reg = new RegExp(String.raw`\\`,'g');
+    assert.deepEqual(reg,/\\/g);
+  });
+  it('node path sep from windows machine',function(){
+    assert.strictEqual(sep,"\\")
+  })
 });

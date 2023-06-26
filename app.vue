@@ -48,10 +48,10 @@
   </div>
 </template>
 <script>
-import {pathPosixToWin32, pathWin32ToPosix} from "~/pathReplacement.mjs";
-import {posixTests, win32Tests} from "~/dev/nodePathTestExamples.mjs";
-import {win32ToWin32JS} from "~/dev/win32ToWin32JS.mjs";
-import {win32ToWin32Slash, win32ToWin32WSL2} from "~/dev/win-to-wsl/win32ToWin32WSL2.mjs";
+import {pathPosixToWin32, pathWin32ToPosix} from "~/src/pathReplacement.mjs";
+import {posixTests, win32Tests} from "~/lib/nodePathTestExamples.mjs";
+import {win32ToWin32JS} from "~/src/win32ToWin32JS.mjs";
+import {win32ToWin32Slash, win32ToWin32WSL2} from "~/src/win32ToWin32WSL2.mjs";
 export default {
   name:'app',
   mounted(){

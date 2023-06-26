@@ -17,6 +17,9 @@ devDependencies:
   pkg:
     specifier: ^5.8.1
     version: 5.8.1
+  vite:
+    specifier: ^4.3.9
+    version: 4.3.9
   vitepress:
     specifier: 1.0.0-beta.2
     version: 1.0.0-beta.2(@algolia/client-search@4.18.0)(search-insights@2.6.0)
