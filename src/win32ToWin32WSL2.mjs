@@ -5,7 +5,8 @@
  * ths might work?
  * pathWin32ToPosix
  */
-import {pathWin32ToPosix} from "./pathReplacement.mjs";
+// import {pathWin32ToPosix} from "./pathReplacement.mjs";
+import {pathWin32ToPosix} from "#src/pathReplacement.mjs";
 
 /**
  *

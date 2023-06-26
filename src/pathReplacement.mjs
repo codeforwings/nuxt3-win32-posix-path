@@ -28,4 +28,4 @@ export function pathPosixToWin32(inPathPosix,sQuote="'"){
   ;
   return / /.test(win32Path) ? `${sQuote}${win32Path}${sQuote}` : win32Path;
 }
-export default {pathWin32ToPosix}
+export default {pathWin32ToPosix,pathPosixToWin32}
