@@ -36,3 +36,15 @@ export const DummyFiles = `
 export function buildNodePath(...args){
   return join(...args)
 }
+
+/**
+ * With spaces!
+ * @type {*[]}
+ *
+ * explorer is different too... no quotes. just raw
+ * C:\Users\Public\temp spaces\a\b c\d
+ */
+export const DummyWindowsFiles = [
+  "C:\\Users\\Public\\temp\\spaces\\some space",
+  "C:\\Users\\Public\\temp\\spaces\\some space\\some file.txt",
+]

@@ -2,13 +2,14 @@
  * Try something like spaces
  * should remove quotes from start and fnish
  * @param inPathWin32
+ * @param spaceEscape {"\\ "|"` "|{string}} - default is \ space, but for windows it's `
  * @return {*}
  */
-export function pathWin32ToPosix(inPathWin32){
+export function pathWin32ToPosix(inPathWin32,spaceEscape = "\\ "){
   return inPathWin32.trim()
     .replace(/\\\\/g,'\\')//todo check me... for network unc paths
     .replace(/\\/g,"/")// \ to /
-    .replace(/ /g,"\\ ")
+    .replace(/ /g,spaceEscape)// spaces to \ spaces, or sep
     .replace(/^["']/,'')
     .replace(/["']$/,'')
   ;

@@ -1,16 +1,16 @@
 /**
-yarn add mocha -D
+ yarn add mocha -D
 
-package.json
-  "imports": {
+ package.json
+ "imports": {
     "##/*": {
       "default": "./*"
     },
   },
-  "type": "module",
+ "type": "module",
 
-  jsconfig.json
-  {
+ jsconfig.json
+ {
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -22,7 +22,7 @@ package.json
 
 
 
-*/
+ */
 // import { createRequire } from 'module';
 // const require = createRequire(import.meta.url);
 // const assert = require('assert');
@@ -84,9 +84,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url)); //Folder of current f
 const __filename = fileURLToPath(import.meta.url); //file (from file://url)
 
 //interesting works, but experimental
-import * as packages from '##/package.json'  assert {
-  type: 'json',
-}
+// import * as packages from '##/package.json'  assert {
+//     type: 'json',
+//     }
+import os from "node:os";
 
 /**
  * const currentDirectory = process.cwd();
@@ -106,6 +107,9 @@ describe('fileUrlToPath vs resolve windows', function(){
    */
   it('try node:path - nope',function(){
     //assert.strictEqual(1,1);//require assert
+    if(os.platform() !== 'win32'){
+      return true;
+    }
     let out
     let winExpectedButNotWant = "#src\\index.mjs";//actually wrong
     //resolves on windows changes my path to \\
@@ -120,10 +124,21 @@ describe('fileUrlToPath vs resolve windows', function(){
     assert.strictEqual(out,winExpectedButNotWant);
     // assert.ok(!out);//""
 
-    console.log(packages);
-
-
-
+    // console.log(packages);
+  });
+  /**
+   * C:\Users\Public\Documents
+   */
+  it('make fake file with spaces',function() {
+    //assert.strictEqual(1,1);//require assert
+    if (os.platform() !== 'win32') {
+      return true;
+    }
+    let out
+    fs.mkdirSync('temp/resolve\ node-mjs.test.mjs', {recursive: true,force:true});
+    fs.writeFileSync('temp/resolve\ node-mjs.test.mjs/some file.txt', "some file.txt\n");
+    out = fs.readFileSync('C:\\Users\\Jason\\WebstormProjects\\nuxt3-win32-posix-path\\temp\\resolve node-mjs.test.mjs\\some file.txt').toString()
+    assert.strictEqual(out,"some file.txt\n");
   });
 
 });

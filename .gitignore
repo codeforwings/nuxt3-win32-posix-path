@@ -10,3 +10,4 @@ dist
 /docs/.vitepress/cache/
 /docs/.vitepress/dist/
 /dev/win-to-wsl/logs/
+/temp/

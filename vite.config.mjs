@@ -32,7 +32,7 @@ export default defineConfig({
       //i lost my jsdocs though... weird
       entry: [ //"entry" can be a dictionary or array of multiple entry points
         fileURLToPath(new URL('./src/index.mjs', import.meta.url)),
-        fileURLToPath(new URL('./dev/node-fs-utils-dev/create-dummy-files.mjs', import.meta.url)),
+        // fileURLToPath(new URL('./dev/node-fs-utils-dev/create-dummy-files.mjs', import.meta.url)),
         // fileURLToPath(new URL('./src/win32ToWin32WSL2.mjs', import.meta.url)),
         // fileURLToPath(new URL('./src/import-material-theme-pup.mjs', import.meta.url)),
         // resolve('src/import-theme-chrome-pup.mjs'),

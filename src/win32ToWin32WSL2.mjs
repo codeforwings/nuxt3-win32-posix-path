@@ -42,7 +42,7 @@ export function win32ToWin32Slash(win32Path){
   let win32Slash;
   /* replace \ with / */
   win32Slash = pathWin32ToPosix(
-    win32Path
+    win32Path,"` "
 
   );
   /* convert Drive letter to /mnt/<lowercase>/ */
