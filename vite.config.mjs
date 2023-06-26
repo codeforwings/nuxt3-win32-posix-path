@@ -1,7 +1,7 @@
 // Utilities
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
-import { resolve } from 'node:path'
+// import { resolve } from 'node:path'
 // https://vitejs.dev/config/
 export default defineConfig({
   define: { 'process.env': {} },
