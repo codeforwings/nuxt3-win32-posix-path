@@ -1,3 +1,6 @@
+/**
+ * Apparently this messes with the build....
+ */
 // Utilities
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
@@ -28,7 +31,7 @@ export default defineConfig({
     outDir: fileURLToPath(new URL('./lib/dist/', import.meta.url)),
     lib: {
       name: 'nuxt3-win32-posix-path',
-      formats: ['es', 'cjs'],//('es' | 'cjs' | 'umd' | 'iife')
+      formats: ['es', 'cjs','umd'],//('es' | 'cjs' | 'umd' | 'iife')
       //i lost my jsdocs though... weird
       entry: [ //"entry" can be a dictionary or array of multiple entry points
         fileURLToPath(new URL('./src/index.mjs', import.meta.url)),
@@ -45,7 +48,7 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['puppeteer',"puppeteer-core","node:path/posix","node*"],
+      // external: ['puppeteer',"puppeteer-core","node:path/posix","node*"],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
