@@ -1,5 +1,5 @@
-import { _ as a, o as n, a as r, b as e, t as s, e as d, w as l, f as c, h as p, p as f, i as m } from "./entry.c56b0477.js";
-import { u as h } from "./composables.c2c501a6.js";
+import { _ as a, o as n, a as r, b as e, t as s, e as d, w as l, f as c, h as p, p as f, i as m } from "./entry.f63deee0.js";
+import { u as h } from "./composables.bf4f16c1.js";
 const x = (t) => (f("data-v-6a830dec"), t = t(), m(), t), u = { class: "font-sans antialiased bg-white dark:bg-black text-black dark:text-white grid min-h-screen place-content-center overflow-hidden" }, g = /* @__PURE__ */ x(() => /* @__PURE__ */ e("div", { class: "fixed left-0 right-0 spotlight z-10" }, null, -1)), _ = { class: "max-w-520px text-center z-20" }, b = ["textContent"], w = ["textContent"], y = { class: "w-full flex items-center justify-center" }, S = {
   __name: "error-404",
   props: {

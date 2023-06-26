@@ -6963,7 +6963,7 @@ function gp(e, t, n, r, o, s) {
 const mp = /* @__PURE__ */ tp(np, [["render", gp]]), Rs = {
   __name: "nuxt-root",
   setup(e) {
-    const t = Zc(() => import("./error-component.3e8a904a.js").then((s) => s.default || s)), n = be(), r = n.deferHydration();
+    const t = Zc(() => import("./error-component.cafcd4eb.js").then((s) => s.default || s)), n = be(), r = n.deferHydration();
     Oi("_route", Sf()), n.hooks.callHookWith((s) => s.map((i) => i()), "vue:setup");
     const o = Vo();
     return Ei((s, i, l) => {
