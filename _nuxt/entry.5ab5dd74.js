@@ -6779,17 +6779,10 @@ const qd = fr((e) => {
   qd,
   Jd
 ];
-function Io(e, t = "\\ ") {
-  return e.trim().replace(/\\\\/g, "\\").replace(/\\/g, "/").replace(/ /g, t).replace(/^["']/, "").replace(/["']$/, "");
-}
-function Qd(e, t = "'") {
-  const n = e.trim().replace(/\//g, "\\").replace(/\\ /g, " ");
-  return / /.test(n) ? `${t}${n}${t}` : n;
-}
 function ze(e, t) {
   return { input: e, expected: t };
 }
-const zd = [
+const Qd = [
   ze(
     "C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
     "C:/Users/Jason/OneDrive/Documents/2022/someMD.md"
@@ -6810,7 +6803,7 @@ const zd = [
     "C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty",
     "C:/Users/Jason/OneDrive\\ -\\ Code\\ for\\ Wings/rick\\ and\\ morty"
   )
-], Xd = [
+], zd = [
   ze(
     "C:/Users/Jason/OneDrive/Documents/2022/someMD.md",
     "C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md"
@@ -6824,19 +6817,26 @@ const zd = [
     "'C:\\Users\\Jason\\OneDrive - Code for Wings\\rick and morty'"
   )
 ];
-function Zd(e = "") {
-  return e.trim().replace(/\\\\/g, "\\").replace(/\\/g, "\\\\");
+function Io(e, t = "\\ ") {
+  return e.trim().replace(/\\\\/g, "\\").replace(/\\/g, "/").replace(/ /g, t).replace(/^["']/, "").replace(/["']$/, "");
 }
-function Gd(e) {
+function Xd(e, t = "'") {
+  const n = e.trim().replace(/\//g, "\\").replace(/\\ /g, " ");
+  return / /.test(n) ? `${t}${n}${t}` : n;
+}
+function Zd(e) {
   let t;
   return t = Io(e), t = t.replace(/^([a-zA-Z]):/, (n, r) => "/mnt/" + r.toLowerCase()), t;
 }
-function ep(e) {
+function Gd(e) {
   let t;
   return t = Io(
     e,
     "` "
   ), t = t.replace(/^([a-zA-Z]):/, (n, r) => r.toLowerCase() + ":"), t;
+}
+function ep(e = "") {
+  return e.trim().replace(/\\\\/g, "\\").replace(/\\/g, "\\\\");
 }
 const tp = (e, t) => {
   const n = e.__vccOpts || e;
@@ -6849,9 +6849,9 @@ const tp = (e, t) => {
   },
   data() {
     return {
-      sInputWin32: zd.map((e) => e.input).join(`
+      sInputWin32: Qd.map((e) => e.input).join(`
 `),
-      sInputPosix: Xd.map((e) => e.input).join(`
+      sInputPosix: zd.map((e) => e.input).join(`
 `),
       sInputWin32Normal: [
         "C:\\Users\\Public\\Documents",
@@ -6880,22 +6880,22 @@ const tp = (e, t) => {
     },
     sOutputPosixToWin32() {
       return this.sInputPosix.split(`
-`).map((e) => Qd(e)).join(`
+`).map((e) => Xd(e)).join(`
 `);
     },
     sOutputWin32Normal() {
       return this.sInputWin32Normal.split(`
-`).map((e) => Zd(e)).join(`
+`).map((e) => ep(e)).join(`
 `);
     },
     sOutputWin32ToWsl() {
       return this.sWin32ToWsl.split(`
-`).map((e) => Gd(e)).join(`
+`).map((e) => Zd(e)).join(`
 `);
     },
     sOutputWin32ToSlash() {
       return this.sWin32ToSlash.split(`
-`).map((e) => ep(e)).join(`
+`).map((e) => Gd(e)).join(`
 `);
     }
   }
@@ -6963,7 +6963,7 @@ function gp(e, t, n, r, o, s) {
 const mp = /* @__PURE__ */ tp(np, [["render", gp]]), Rs = {
   __name: "nuxt-root",
   setup(e) {
-    const t = Zc(() => import("./error-component.cafcd4eb.js").then((s) => s.default || s)), n = be(), r = n.deferHydration();
+    const t = Zc(() => import("./error-component.b7a3b61c.js").then((s) => s.default || s)), n = be(), r = n.deferHydration();
     Oi("_route", Sf()), n.hooks.callHookWith((s) => s.map((i) => i()), "vue:setup");
     const o = Vo();
     return Ei((s, i, l) => {

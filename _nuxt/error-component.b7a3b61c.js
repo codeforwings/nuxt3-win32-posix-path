@@ -1,4 +1,4 @@
-import { d as o, o as f, c as g, n as k, g as x, u as t } from "./entry.f63deee0.js";
+import { d as o, o as f, c as g, n as k, g as x, u as t } from "./entry.5ab5dd74.js";
 const h = {
   __name: "nuxt-error-page",
   props: {
@@ -13,7 +13,7 @@ const h = {
       internal: e.includes("node_modules") && !e.includes(".cache") || e.includes("internal") || e.includes("new Promise")
     })).map((e) => `<span class="stack${e.internal ? " internal" : ""}">${e.text}</span>`).join(`
 `);
-    const n = Number(s.statusCode || 500), r = n === 404, u = (a = s.statusMessage) != null ? a : r ? "Page Not Found" : "Internal Server Error", p = s.message || s.toString(), i = void 0, d = o(() => import("./error-404.ebdc177b.js").then((e) => e.default || e)), l = o(() => import("./error-500.e8d201ca.js").then((e) => e.default || e)), m = r ? d : l;
+    const n = Number(s.statusCode || 500), r = n === 404, u = (a = s.statusMessage) != null ? a : r ? "Page Not Found" : "Internal Server Error", p = s.message || s.toString(), i = void 0, d = o(() => import("./error-404.5aa4882a.js").then((e) => e.default || e)), l = o(() => import("./error-500.d3f4107e.js").then((e) => e.default || e)), m = r ? d : l;
     return (e, _) => (f(), g(t(m), k(x({ statusCode: t(n), statusMessage: t(u), description: t(p), stack: t(i) })), null, 16));
   }
 }, E = h;
