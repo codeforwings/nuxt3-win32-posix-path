@@ -89,7 +89,8 @@ describe('vite-press-path-utils.test.mjs', function(){
     [resolve("./src"),"../../src"],//cwd/src, cant be ../src
     [resolve("src"),"../../src"],//cwd/src, same as above. left is okay to repeat
     [resolve("./docs/src"),"../src"],
-    [resolve("./docs"),"../"],
+    // [resolve("./docs"),"../"],//'../' also works and is more clear
+    [resolve("./docs"),".."],//'../' also works and is more clear
   ]
   it('first try', function(){
     for (let i = 0; i < testMatrix.length; i++) {
@@ -102,6 +103,16 @@ describe('vite-press-path-utils.test.mjs', function(){
       // console.log(import.meta.url);
       // const tmp = fileURLToPath(new URL('../..', import.meta.url))
       assert.strictEqual(out,expectedPath);
+    }
+
+
+    //assert.strictEqual(1,1);//require assert
+  });
+    it('reverse use case', function(){
+    for (let i = 0; i < testMatrix.length; i++) {
+      const [inputDestinationPath,expectedRelativePath] = testMatrix[i]; //reversed
+      const out = relative(viteConfigFile, inputDestinationPath);// some of the relative paths may not work
+      assert.strictEqual(out,expectedRelativePath);
     }
 
 
