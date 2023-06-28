@@ -2,6 +2,43 @@
 1. Need to use vscode / webstorm to inject the header or w/e
     * i think there is also called a snippet / wrapper / file template
 
+
+## Install
+```bash
+pnpm add -D vitepress
+pnpm dlx vitepress init
+```
+```gitignore
+/docs/.vitepress/cache/
+/docs/.vitepress/dist/
+```
+```js
+import { defineConfig } from 'vitepress'
+//append to generated:
+export default defineConfig({
+  base:"/material-design-3-import-export-ext/",
+  srcDir: './src',//relative to the package.json vitepress dev <dir>
+  lang: 'en-ca',
+  //section inside
+  themeConfig: {
+    //add better search. https://vitepress.dev/reference/default-theme-search#local-search
+    search: {
+      provider: 'local'
+    },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/codeforwings/material-design-3-import-export-ext' }
+    ],
+    markdown:{
+      //https://vitepress.dev/reference/site-config#markdown
+      lineNumbers: true,
+      space_size: 2,//not sure if this works
+    }
+  }
+})
+
+```
+
+
 # Concepts
 * "On this page"
 * Edit on GitHub 
@@ -29,11 +66,7 @@
 
 Notes
 ---
-## Git Ignore
-```gitignore
-/docs/.vitepress/cache/
-/docs/.vitepress/dist/
-```
+
 # Syntax Highlighting
 [https://github.com/shikijs/shiki/blob/main/docs/languages.md](https://github.com/shikijs/shiki/blob/main/docs/languages.md)
 ```js

@@ -86,3 +86,9 @@ docs/src/public/
 
 
 ```
+
+## Interesting
+```ps1
+# mixing paths actually works in powershell and pwd... with no spaces at least and explorer... crazy
+cd C:\Users\Public/bins
+```
