@@ -37,8 +37,6 @@ export default defineConfig({
 })
 
 ```
-
-
 # Concepts
 * "On this page"
 * Edit on GitHub 
