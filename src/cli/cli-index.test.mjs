@@ -103,7 +103,7 @@ describe('cli-index.test.mjs', function(){
 describe('cli-index.test.mjs binary win', function(){
     // const binaryPath= "lib/dist/bins"
     const binaryCommand = '"lib/dist/bins/index-win.exe"'
-    const binaryCommandWSL = './lib/dist/bins/index-win.exe'
+    const binaryCommandWSL = './lib/dist/bins/index-linux'
     if(os.platform()    !== 'win32'){
         return true;
     }
