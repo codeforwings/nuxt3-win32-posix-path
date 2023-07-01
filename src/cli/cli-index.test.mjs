@@ -78,6 +78,14 @@ function writeToFile(fileName,data,space=2){
 
 /**
  * interesting... didnt work for linux and mac... but for wsl? is it the shell?
+ *
+ lib/dist/bins/index-win.exe C:\\Users\\Public\\bins #pwsh
+ "lib/dist/bins/index-win.exe" "C:\\Users\\Public\\bins" #cmd
+ "./lib/dist/bins/index-win.exe" "C:\\Users\\Public\\bins" #cmd
+ ./"lib/dist/bins/index-win.exe" "C:\\Users\\Public\\bins" #wsl fish ?
+ lib/dist/bins/index-linux "'C:\\Users\\Public\\bins'" # wsl / linux
+ lib/dist/bins/index-macos "'C:\\Users\\Public\\bins'" # macos
+ *
  */
 describe('cli-index.test.mjs all',function(){
   it('raw js cmd',function(){
