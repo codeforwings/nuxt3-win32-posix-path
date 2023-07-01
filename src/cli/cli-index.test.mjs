@@ -66,6 +66,7 @@ this.timeout(500);//500ms
 import fs from 'node:fs';
 import {spawnSync} from "node:child_process";
 import os from "node:os";
+import {win32ToWin32WSL2} from "##/src/index.mjs";
 
 function writeToFile(fileName,data,space=2){
     const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
@@ -78,6 +79,14 @@ function writeToFile(fileName,data,space=2){
 /**
  * interesting... didnt work for linux and mac... but for wsl? is it the shell?
  */
+describe('cli-index.test.mjs all',function(){
+    it('raw js cmd',function(){
+        const sInput = "C:\\Users\\Public\\bins"
+        const expected = "/mnt/c/Users/Public/bins"
+        const out = win32ToWin32WSL2(sInput);
+        assert.strictEqual(out,expected)
+    })
+});
 describe('cli-index.test.mjs', function(){
     it('verify command line mjs', function(){
         //assert.strictEqual(1,1);//require assert
