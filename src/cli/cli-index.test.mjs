@@ -103,6 +103,7 @@ describe('cli-index.test.mjs', function(){
 describe('cli-index.test.mjs binary win', function(){
     // const binaryPath= "lib/dist/bins"
     const binaryCommand = '"lib/dist/bins/index-win.exe"'
+    const binaryCommandWSL = './lib/dist/bins/index-win.exe'
     if(os.platform()    !== 'win32'){
         return true;
     }
@@ -111,6 +112,18 @@ describe('cli-index.test.mjs binary win', function(){
         //assert.strictEqual(1,1);//require assert
         const expected = "/mnt/c/Users/Public/bins\n"
         const out = spawnSync(binaryCommand,["C:\\Users\\Public\\bins"],{shell:true})
+        const stdout = out.stdout.toString();
+        if(out.status !==0){
+            console.error(out.stderr.toString())
+            throw out.error;
+        }
+        assert.strictEqual(stdout,expected)
+
+    });
+        it('verify command line wsl', function(){
+        //assert.strictEqual(1,1);//require assert
+        const expected = "/mnt/c/Users/Public/bins\n"
+        const out = spawnSync('wsl -e',[binaryCommandWSL,"C:\\Users\\Public\\bins"],{shell:true})
         const stdout = out.stdout.toString();
         if(out.status !==0){
             console.error(out.stderr.toString())
