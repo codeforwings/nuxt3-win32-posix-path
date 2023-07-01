@@ -3,22 +3,22 @@
 
  package.json
  "imports": {
-    "##/*": {
-      "default": "./*"
-    },
-  },
+ "##/*": {
+ "default": "./*"
+ },
+ },
  "type": "module",
 
  jsconfig.json
  {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "##/*": ["./*"]
-    }
-  },
-  "exclude": ["node_modules", ".nuxt", "dist"]
-}
+ "compilerOptions": {
+ "baseUrl": ".",
+ "paths": {
+ "##/*": ["./*"]
+ }
+ },
+ "exclude": ["node_modules", ".nuxt", "dist"]
+ }
 
 
 
@@ -139,7 +139,8 @@ describe('cli-index.test.mjs binary win', function(){
     it('verify command line wsl', function(){
         //assert.strictEqual(1,1);//require assert
         const expected = "/mnt/c/Users/Public/bins\n"
-        const out = spawnSync('wsl -e',[binaryCommandWSL,"C:\\Users\\Public\\bins"],{shell:true})
+        // const out = spawnSync('wsl -e',[binaryCommandWSL,"C:\\Users\\Public\\bins"],{shell:true})
+        const out = spawnSync('wsl -e',[binaryCommandWSL,"'C:\\Users\\Public\\bins'"],{shell:true})
         const stdout = out.stdout.toString();
         if(out.status !==0){
             console.error(out.stderr.toString())
@@ -178,7 +179,7 @@ describe('cli-index.test.mjs binary mac', function(){
     it('verify command line mjs', function(){
         //assert.strictEqual(1,1);//require assert
         const expected = "/mnt/c/Users/Public/bins\n"
-        const out = spawnSync(binaryCommand,["C:\\Users\\Public\\bins"],{shell:true})
+        const out = spawnSync(binaryCommand,["'C:\\Users\\Public\\bins'"],{shell:true})
         const stdout = out.stdout.toString();
         if(out.status !==0){
             console.error(out.stderr.toString())
@@ -213,7 +214,7 @@ describe('cli-index.test.mjs binary deb', function(){
     it('verify command line mjs', function(){
         //assert.strictEqual(1,1);//require assert
         const expected = "/mnt/c/Users/Public/bins\n"
-        const out = spawnSync(binaryCommand,["C:\\Users\\Public\\bins"],{shell:true})
+        const out = spawnSync(binaryCommand,["'C:\\Users\\Public\\bins'"],{shell:true})
         const stdout = out.stdout.toString();
         if(out.status !==0){
             console.error(out.stderr.toString())
