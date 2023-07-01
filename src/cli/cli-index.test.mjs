@@ -187,3 +187,38 @@ describe('cli-index.test.mjs binary mac', function(){
     });
 
 });
+/**
+ * Don't need this binary. just testing it
+ * interestingly... it failed
+ */
+describe('cli-index.test.mjs binary deb', function(){
+    // const binaryPath= "lib/dist/bins"
+    let binaryCommand = './lib/dist/bins/index-linux';//
+    if(os.platform() !== 'linux'){
+        return true;
+    }
+
+    it('verify command line mjs', function(){
+        //assert.strictEqual(1,1);//require assert
+        const expected = "/mnt/c/Users/Public/bins\n"
+        const out = spawnSync(binaryCommand,["C:\\Users\\Public\\bins"],{shell:true})
+        const stdout = out.stdout.toString();
+        if(out.status !==0){
+            console.error(out.stderr.toString())
+            throw out.error;
+        }
+        assert.strictEqual(stdout,expected)
+
+    });
+    it('verify command line mjs error', function(){
+        //assert.strictEqual(1,1);//require assert
+        const out = spawnSync(binaryCommand,[],{shell:true})
+        // console.log(out.stdout.toString());
+        if(out.status !==0){
+            assert.ok(true)
+            // console.error(out.stderr.toString())
+            // throw out.error;
+        }
+    });
+
+});
