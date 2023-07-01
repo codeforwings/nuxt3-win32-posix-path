@@ -4,6 +4,9 @@
  *
  * ths might work?
  * pathWin32ToPosix
+ *
+ * doesnt make much sense though... should just convert to ps1 / bash and run test on it.
+ * exe is too big, also has to go to stdout...
  */
 // import {pathWin32ToPosix} from "./pathReplacement.mjs";
 import {pathWin32ToPosix} from "#src/pathReplacement.mjs";

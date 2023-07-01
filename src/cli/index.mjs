@@ -14,4 +14,4 @@ if(scriptArgs.length !== 1){
     process.exit(1);
 }
 const wslPath = win32ToWin32WSL2(scriptArgs[0])
-console.log(wslPath);
+console.log(wslPath);//returns \n, might not want that
