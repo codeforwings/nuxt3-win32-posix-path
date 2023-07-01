@@ -75,6 +75,9 @@ function writeToFile(fileName,data,space=2){
     );
 }
 
+/**
+ * interesting... didnt work for linux and mac... but for wsl? is it the shell?
+ */
 describe('cli-index.test.mjs', function(){
     it('verify command line mjs', function(){
         //assert.strictEqual(1,1);//require assert
