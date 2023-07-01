@@ -15,13 +15,13 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "build-rollup:vite": "vite build --mode production"
+    "build-rollup:vite": "vite build --mode production",
+    "build-rollup:pkg": "pkg lib/dist/index.js --out-path lib/dist/bins"
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
     "mocha": "^10.2.0",
     "nuxt": "3.0.0",
-    "pkg": "^5.8.1",
     "vite": "^4.3.9",
     "vitepress": "1.0.0-beta.2",
     "vitepress-plugin-auto-sidebar": "^1.1.0",
