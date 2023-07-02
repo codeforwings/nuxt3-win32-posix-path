@@ -78,8 +78,8 @@ function writeToFile(fileName,data,space=2){
 
 import {posix,win32,sep} from 'node:path'
 
-import {pathWin32ToPosix,pathPosixToWin32} from "../../src/pathReplacement.mjs"
-import {posixTests, win32Tests} from "../../lib/nodePathTestExamples.mjs";
+import {pathWin32ToPosix,pathPosixToWin32} from "##/src/pathReplacement.mjs"
+import {posixTests, win32Tests} from "##/lib/nodePathTestExamples.mjs";
 
 /**
  * mobaxterm is /drives/c or cd c:/
