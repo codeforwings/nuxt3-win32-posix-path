@@ -65,10 +65,10 @@ this.timeout(500);//500ms
  */
 import fs from 'node:fs';
 // import {win32ToWin32WSL2} from "##/dev/win-to-wsl/win32ToWin32WSL2.mjs";
-import {win32ToWin32Slash, win32ToWin32WSL2} from "#src/win32ToWin32WSL2.mjs";//fixme check the import subpath in package.json in other branch
+import {win32ToWin32Slash, win32ToWin32WSL2} from "##/src/win32ToWin32WSL/win32ToWin32WSL2.mjs";//fixme check the import subpath in package.json in other branch
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
-  const filePath = `dev/win-to-wsl/${sFileName}`
+  const filePath = `temp/${sFileName}`
   fs.writeFileSync(filePath,
     typeof data === 'string' ? data :JSON.stringify(data,null,+space)
   );
@@ -77,6 +77,7 @@ function writeToFile(fileName,data,space=2){
 /**
  * To integrate and move with other tests
  */
+
 describe('win32ToWin32WSL2.test.mjs', function(){
   it('wsl', function(){
     //assert.strictEqual(1,1);//require assert
@@ -135,4 +136,48 @@ describe('win32ToWin32WSL2.test.mjs', function(){
   //maybe later use try ones with spaces, for not now.
   // because im reallocating and renaming / files and folders with spaces
 
+});
+
+
+/**
+ * wsl param tests
+ *
+ */
+const WSLPassTests = [
+  ["C:\\Users\\Public\\Documents","/mnt/c/Users/Public/Documents"],//maybe append with quotes instead?
+  ["C:\\Users\\Public\\temp spaces\\a\\b c\\d","/mnt/c/Users/Public/temp\\ spaces/a/b\\ c/d"],
+  ["C:\\Users\\Public\\temp spaces\\a\\b c\\d","/mnt/c/Users/Public/temp\\ spaces/a/b\\ c/d"],
+  ["C:\\\\Users\\\\Public\\\\Documents","/mnt/c/Users/Public/Documents"],
+  //todo look into thje backtick
+  // ["C:\\Users\\Public\\temp` spaces\\a\\b` c\\d","/mnt/c/Users/Public/temp\\ spaces/a/b\\ c/d"],
+]
+//should work with changing the length of the array
+const ogLength = WSLPassTests.length
+for (let i = 0; i < ogLength; i++) {
+  const row = WSLPassTests[i];
+  row[2] = i;
+  WSLPassTests.push([`'${row[0]}'`,row[1],`${i}1`]);//append with single quotes
+  WSLPassTests.push([`"${row[0]}"`,row[1],`${i}2`]);//append with double quotes
+
+}
+// writeToFile('WSLPassTests.jsonc',WSLPassTests);
+/**
+ * parameterized tests
+ */
+import {spawnSync} from "node:child_process";
+
+describe('WSLPassTests', function(){
+  for (let i = 0; i < WSLPassTests.length; i++) {
+    const [inputWinPath, expectedMntPath, wslPassTestIndex] = WSLPassTests[i];
+    it(`WSLPassTests MJS ${wslPassTestIndex}`, function () {
+      // console.log(wslPassTestIndex,inputWinPath);
+      const actual = win32ToWin32WSL2(inputWinPath);
+      assert.strictEqual(actual,expectedMntPath);
+    });
+    it(`WSLPassTests ps1 ${wslPassTestIndex}`, function () {
+      // console.log(wslPassTestIndex,inputWinPath);
+      const output = spawnSync(inputWinPath);
+      assert.strictEqual(actual,expectedMntPath);
+    });
+  }
 });
