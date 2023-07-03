@@ -13,7 +13,8 @@ import { fileURLToPath, URL } from 'node:url'
 /**
  * @type {UserConfigExport}
  */
-export const viteBaseConfig = {
+export const viteBaseConfig = (()=>{
+  return {
   define: { 'process.env': {} },
   resolve: {
     alias: {
@@ -71,5 +72,8 @@ export const viteBaseConfig = {
     },
   },
 
-}
+}})();
+export const rootFilePath = fileURLToPath(new URL('./', import.meta.url));
+/** @type {string|URL} */
+export const rootFileUrl = import.meta.url;
 export default defineConfig(viteBaseConfig)
