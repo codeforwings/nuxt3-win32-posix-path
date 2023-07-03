@@ -136,7 +136,7 @@ describe('nodePath.test.mjs', function(){
 const PathWin32ToPosixTests = [
   ["C:\\Users\\Public\\Documents","C:/Users/Public/Documents"],//maybe append with quotes instead?
   ["C:\\Users\\Public\\temp spaces\\a\\b c\\d","C:/Users/Public/temp\\ spaces/a/b\\ c/d"],
-  ["C:\\Users\\Public\\temp spaces\\a\\b c\\d","C:/Users/Public/temp\\ spaces/a/b\\ c/d"],
+  ["C:\\\\Users\\\\Public\\\\temp spaces\\\\a\\\\b c\\\\d","C:/Users/Public/temp\\ spaces/a/b\\ c/d"],
   ["C:\\\\Users\\\\Public\\\\Documents","C:/Users/Public/Documents"]
 ];
 const ogLength = PathWin32ToPosixTests.length
@@ -158,7 +158,7 @@ describe('PathWin32ToPosixTests', function(){
     });
     it(`PathWin32ToPosixTests ps1 ${win32ToPosixIndex}`, function () {
       // console.log(wslPassTestIndex,inputWinPath);
-      const output = spawnSync(`pwsh.exe -file lib/test-utils/pwsh-test-mocha.ps1`,[`"${inputWinPath}"`],{shell:true});
+      const output = spawnSync(`pwsh.exe -file lib/test-utils/pwsh-test-mocha.ps1`,[inputWinPath],{shell:true});
       // const output = spawnSync(`pwsh.exe -Command write-host ${inputWinPath}`,[],{shell:true});
       if(output.status !== 0){
         console.log(output.stdout.toString())

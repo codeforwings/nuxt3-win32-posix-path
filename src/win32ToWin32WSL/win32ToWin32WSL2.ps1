@@ -1,4 +1,5 @@
 <#
+  pwsh.exe -File src\win32ToWin32WSL\win32ToWin32WSL2.ps1 'C:\Users\username\Downloads\'
 #>
 function pathWin32ToPosix { #
   param($inPathWin32,$spaceEscape = "\ ") #
