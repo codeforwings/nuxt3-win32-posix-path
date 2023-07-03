@@ -143,7 +143,7 @@ describe('win32ToWin32WSL2.test.mjs', function(){
  * wsl param tests
  *
  */
-const WSLPassTests = [
+export const WSLPassTests = [
   ["C:\\Users\\Public\\Documents","/mnt/c/Users/Public/Documents"],//maybe append with quotes instead?
   ["C:\\Users\\Public\\temp spaces\\a\\b c\\d","/mnt/c/Users/Public/temp\\ spaces/a/b\\ c/d"],
   ["C:\\Users\\Public\\temp spaces\\a\\b c\\d","/mnt/c/Users/Public/temp\\ spaces/a/b\\ c/d"],
@@ -165,8 +165,36 @@ for (let i = 0; i < ogLength; i++) {
  * parameterized tests
  */
 import {spawnSync} from "node:child_process";
+import {createMochaCliExe} from "##/lib/test-utils/mocha-cli-exec.mjs";
 
 describe('WSLPassTests', function(){
+  /** @type {string|'Win32ToWin32WSL2BinaryPath'} */
+  const W2WB = "lib/bin_build/dist/index-win.exe";
+  const assertW2Wb = createMochaCliExe(W2WB);
+  /* raw */
+  it('WSLPassTests mocha exe', function(){
+    const output = spawnSync(
+      // `"${W2WB}" [C:\\` //cmd needs to double quote
+      `"${W2WB}"`,[WSLPassTests[0][0]],{shell:true}
+    );
+    if(output.status !== 0){
+      console.error(output);
+      console.log(output.stdout.toString())
+      console.error(output.stderr.toString())
+      throw new Error("status not 0");
+    }
+    const actual = output.stdout.toString().trim();
+    assert.strictEqual(actual,WSLPassTests[0][1]);
+  });
+  /* wrapper note reversed */
+  it('WSLPassTests assertW2Wb', function(){
+    assertW2Wb(WSLPassTests[0][1],WSLPassTests[0][0]);
+  });
+    /* wrapper note reversed */
+  it('WSLPassTests assertW2Wb - spaces', function(){
+    assertW2Wb(WSLPassTests[1][1],WSLPassTests[1][0]);
+  });
+  /**/
   for (let i = 0; i < WSLPassTests.length; i++) {
     const [inputWinPath, expectedMntPath, wslPassTestIndex] = WSLPassTests[i];
     it(`WSLPassTests MJS ${wslPassTestIndex}`, function () {
@@ -174,10 +202,15 @@ describe('WSLPassTests', function(){
       const actual = win32ToWin32WSL2(inputWinPath);
       assert.strictEqual(actual,expectedMntPath);
     });
-    it(`WSLPassTests ps1 ${wslPassTestIndex}`, function () {
-      // console.log(wslPassTestIndex,inputWinPath);
-      const output = spawnSync(inputWinPath);
-      assert.strictEqual(actual,expectedMntPath);
+    /* scrapping ps1 / sh using exe for now */
+    // it(`WSLPassTests ps1 ${wslPassTestIndex}`, function () {
+    //   // console.log(wslPassTestIndex,inputWinPath);
+    //   const output = spawnSync(inputWinPath);
+    //   assert.strictEqual(actual,expectedMntPath);
+    // });
+    it(`WSLPassTests exe ${wslPassTestIndex}`, function(){
+      //   // console.log(wslPassTestIndex,inputWinPath);
+      assertW2Wb(expectedMntPath,[inputWinPath]);
     });
   }
 });
