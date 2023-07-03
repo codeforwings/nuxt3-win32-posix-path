@@ -159,6 +159,7 @@ describe('PathWin32ToPosixTests', function(){
     it(`PathWin32ToPosixTests ps1 ${win32ToPosixIndex}`, function () {
       // console.log(wslPassTestIndex,inputWinPath);
       const output = spawnSync(`pwsh.exe -file lib/test-utils/pwsh-test-mocha.ps1`,[inputWinPath],{shell:true});
+      // const output = spawnSync(`pwsh.exe -file lib/test-utils/pwsh-test-mocha.ps1`,[inputWinPath],{shell:false});
       // const output = spawnSync(`pwsh.exe -Command write-host ${inputWinPath}`,[],{shell:true});
       if(output.status !== 0){
         console.log(output.stdout.toString())
