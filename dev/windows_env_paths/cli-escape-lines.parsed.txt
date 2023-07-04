@@ -1,0 +1,16 @@
+c\
+'c\hi'
+"c\hi"
+"c\\hi"
+c\\hi
+c\hi
+~
+~/repo
+"~"
+'~'
+"~/repo"
+'~/repo'
+"$HOME"
+'$HOME'
+"$HOME/repo"
+'$HOME/repo'

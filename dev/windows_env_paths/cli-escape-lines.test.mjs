@@ -74,7 +74,7 @@ function writeToFile(fileName,data,space=2){
 
 
 /**
- *
+ * todo move / extract
  * @param line {string}
  * @returns {string|null}
  */
@@ -124,21 +124,16 @@ describe('cli-escape-lines.test.mjs', function(){
   it('Ignore # and empty lines', function(){
     //assert.strictEqual(1,1);//require assert
     assert.strictEqual(typeof rawData,'string');
+    /* open write stream */
+    const ws = fs.createWriteStream('dev/windows_env_paths/cli-escape-lines.parsed.txt');
     for (let i = 0; i < data.length; i++) {
       const line = data[i];
-      /* extract content before # and ignore empty */
-      const rowWithoutComment = row
-        .replace(/#.*$/,'')
-        .trim();
-      const regexExtract = /^#|^ #/;
-      const regexEmpty = /^\s*$/;
-      regexExtract.match
-
-
+      const row = handleBashLine(line);
+      if(row === null) continue;
+      ws.write(row + '\n');
     }
 
+    ws.end();
 
-
-    console.log(bData);
   });
 });
