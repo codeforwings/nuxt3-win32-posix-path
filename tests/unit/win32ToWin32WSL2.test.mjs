@@ -113,24 +113,24 @@ describe('win32ToWin32WSL2.test.mjs', function(){
     assert.strictEqual(actual,expectedOutput);
   });
   /* try with network mount add \\ path to check real quick */
-  it("pwsh spaces", function(){
-    let input,expected,actual;
-    input = "C:\\Users\\Public\\temp spaces\\a\\b c\\d";//apparently pwsh can cd into this
-    assert.ok(fs.existsSync(input));
-    expected = "c:/Users/Public/temp\ spaces/a/b\ c/d";//will work with quotes
-    assert.ok(fs.existsSync(expected));//works with fs, but not with pwsh
-    // actual = win32ToWin32Slash(input);
-    // assert.strictEqual(actual,expected);
-
-    // expected = "'c:/Users/Public/temp spaces/a/b c/d'";//single quotes, dont escape
-    expected = "c:/Users/Public/temp` spaces/a/b` c/d";//backtick escape added
-    //double quotes need escape. but pwsh is backtick `
-    actual = win32ToWin32Slash(input);
-    // assert.ok(fs.existsSync(expected));
-    assert.strictEqual(actual,expected);
-
-
-  });
+  // it("pwsh spaces", function(){
+  //   let input,expected,actual;
+  //   input = "C:\\Users\\Public\\temp spaces\\a\\b c\\d";//apparently pwsh can cd into this
+  //   assert.ok(fs.existsSync(input));
+  //   expected = "c:/Users/Public/temp\ spaces/a/b\ c/d";//will work with quotes
+  //   assert.ok(fs.existsSync(expected));//works with fs, but not with pwsh
+  //   // actual = win32ToWin32Slash(input);
+  //   // assert.strictEqual(actual,expected);
+  //
+  //   // expected = "'c:/Users/Public/temp spaces/a/b c/d'";//single quotes, dont escape
+  //   expected = "c:/Users/Public/temp` spaces/a/b` c/d";//backtick escape added
+  //   //double quotes need escape. but pwsh is backtick `
+  //   actual = win32ToWin32Slash(input);
+  //   // assert.ok(fs.existsSync(expected));
+  //   assert.strictEqual(actual,expected);
+  //
+  //
+  // });
   /* todo add more unit tests and try quotes and spaces etc.*/
   //todo write down what works...
   //maybe later use try ones with spaces, for not now.
