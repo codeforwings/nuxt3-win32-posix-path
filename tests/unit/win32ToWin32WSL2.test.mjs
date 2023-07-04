@@ -165,11 +165,16 @@ for (let i = 0; i < ogLength; i++) {
  * parameterized tests
  */
 import {spawnSync} from "node:child_process";
-import {createMochaCliExe} from "##/lib/test-utils/mocha-cli-exec.mjs";
+import {createMochaCliExe, createMochaCliExeNew} from "##/lib/test-utils/mocha-cli-exec.mjs";
 
 describe('WSLPassTests', function(){
+  /* if windows */
+  if(process.platform !== 'win32'){
+    return;
+  }
   /** @type {string|'Win32ToWin32WSL2BinaryPath'} */
   const W2WB = "lib/bin_build/dist/index-win.exe";
+
   const assertW2Wb = createMochaCliExe(W2WB);
   /* raw */
   it('WSLPassTests mocha exe', function(){
@@ -211,6 +216,36 @@ describe('WSLPassTests', function(){
     it(`WSLPassTests exe ${wslPassTestIndex}`, function(){
       //   // console.log(wslPassTestIndex,inputWinPath);
       assertW2Wb(expectedMntPath,[inputWinPath]);
+    });
+  }
+});
+
+/**
+ * Using debian wsl calling from windows
+ * works but slow 800 ms per call
+ */
+describe("WSL Factory function from windows",function() {
+  const W2WB = "lib/bin_build/dist/index-linux";
+  const assertW2Wb = createMochaCliExeNew('wsl.exe',[ "--distribution Debian --user root -e",W2WB]);
+  // it('test process.platform', function () {
+  //   assert.strictEqual(process.platform, 'linux');//for wsl
+  // });
+    for (let i = 0; i < WSLPassTests.length; i++) {
+    const [inputWinPath, expectedMntPath, wslPassTestIndex] = WSLPassTests[i];
+    it(`WSLPassTests MJS ${wslPassTestIndex}`, function () {
+      // console.log(wslPassTestIndex,inputWinPath);
+      const actual = win32ToWin32WSL2(inputWinPath);
+      assert.strictEqual(actual,expectedMntPath);
+    });
+    /* scrapping ps1 / sh using exe for now */
+    // it(`WSLPassTests ps1 ${wslPassTestIndex}`, function () {
+    //   // console.log(wslPassTestIndex,inputWinPath);
+    //   const output = spawnSync(inputWinPath);
+    //   assert.strictEqual(actual,expectedMntPath);
+    // });
+    it(`WSLPassTests exe ${wslPassTestIndex}`, function(){
+      //   // console.log(wslPassTestIndex,inputWinPath);
+      assertW2Wb(inputWinPath,expectedMntPath);
     });
   }
 });
