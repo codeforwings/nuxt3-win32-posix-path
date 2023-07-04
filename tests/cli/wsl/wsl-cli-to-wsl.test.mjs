@@ -70,7 +70,6 @@ this.timeout(500);//500ms
 import fs from 'node:fs';
 // import {win32ToWin32WSL2} from "##/dev/win-to-wsl/win32ToWin32WSL2.mjs";
 import {win32ToWin32Slash, win32ToWin32WSL2} from "##/src/win32ToWin32WSL/win32ToWin32WSL2.mjs";//fixme check the import subpath in package.json in other branch
-import {WSLPassTests} from "##/tests/unit/win32ToWin32WSL2.test.mjs";
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
   const filePath = `temp/${sFileName}`
@@ -92,6 +91,7 @@ function writeToFile(fileName,data,space=2){
  * parameterized tests
  */
 import {createMochaCliExeNew} from "##/lib/test-utils/mocha-cli-exec.mjs";
+import {WSLPassTests} from "##/lib/test-utils/ConstPathTests.mjs";
 /**
  * should work for both wsl and linux
  */
