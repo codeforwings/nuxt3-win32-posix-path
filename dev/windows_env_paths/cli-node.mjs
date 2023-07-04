@@ -4,4 +4,4 @@
  * @type {string[]}
  */
 const args = process.argv.slice(2);
-console.log(args,'len: ',args.length);
+console.log(args,args[0][2],'len: ',args.length);
