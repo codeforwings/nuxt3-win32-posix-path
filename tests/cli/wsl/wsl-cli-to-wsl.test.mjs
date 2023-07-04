@@ -7,22 +7,22 @@
 
  package.json
  "imports": {
-    "##/*": {
-      "default": "./*"
-    },
-  },
+ "##/*": {
+ "default": "./*"
+ },
+ },
  "type": "module",
 
  jsconfig.json
  {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "##/*": ["./*"]
-    }
-  },
-  "exclude": ["node_modules", ".nuxt", "dist"]
-}
+ "compilerOptions": {
+ "baseUrl": ".",
+ "paths": {
+ "##/*": ["./*"]
+ }
+ },
+ "exclude": ["node_modules", ".nuxt", "dist"]
+ }
 
 
 
@@ -32,7 +32,7 @@
 // const assert = require('assert');
 // const {describe,it} = require('mocha');
 import assert from 'node:assert';
-import { describe, it} from 'mocha';
+import {describe, it} from 'mocha';
 /*
 1.
 yarn add mocha @babel/polyfill @babel/register @babel/preset-env babel-plugin-module-resolver --dev
@@ -68,8 +68,16 @@ this.timeout(500);//500ms
  * @param data will automatically be changed
  */
 import fs from 'node:fs';
+import process from 'node:process';
 // import {win32ToWin32WSL2} from "##/dev/win-to-wsl/win32ToWin32WSL2.mjs";
-import {win32ToWin32Slash, win32ToWin32WSL2} from "##/src/win32ToWin32WSL/win32ToWin32WSL2.mjs";//fixme check the import subpath in package.json in other branch
+import {win32ToWin32WSL2} from "##/src/win32ToWin32WSL/win32ToWin32WSL2.mjs"; //fixme check the import subpath in package.json in other branch
+// writeToFile('WSLPassTests.jsonc',WSLPassTests);
+/**
+ * parameterized tests
+ */
+import {createMochaCliExeNew} from "##/lib/test-utils/mocha-cli-exec.mjs";
+import {WSLPassTests} from "##/lib/test-utils/ConstPathTests.mjs";
+
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
   const filePath = `temp/${sFileName}`
@@ -77,21 +85,20 @@ function writeToFile(fileName,data,space=2){
     typeof data === 'string' ? data :JSON.stringify(data,null,+space)
   );
 }
-
+describe("linux Factory mjs",function() {
+  if (process.platform === 'win32') return;
+  const W2WB = "node";
+  const assertNodeIndexMJS = createMochaCliExeNew(W2WB,['src/cli/index.mjs']);
+  //for linux. needs to double slash to escape
+  it('cli index.mjs normal',function(){
+    // assertNodeIndexMJS(WSLPassTests[0][0].replace(/\\/g,"\\\\"),WSLPassTests[0][1])
+    // assertNodeIndexMJS(WSLPassTests[0][0].replace(/\\/g,"\\\\"),WSLPassTests[0][1])
+    assertNodeIndexMJS(WSLPassTests[0][0],WSLPassTests[0][1])
+  })
+});
 /**
  * To integrate and move with other tests
  */
-
-
-
-
-
-// writeToFile('WSLPassTests.jsonc',WSLPassTests);
-/**
- * parameterized tests
- */
-import {createMochaCliExeNew} from "##/lib/test-utils/mocha-cli-exec.mjs";
-import {WSLPassTests} from "##/lib/test-utils/ConstPathTests.mjs";
 /**
  * should work for both wsl and linux
  */
@@ -102,7 +109,7 @@ describe("linux Factory",function() {
   // it('test process.platform', function () {
   //   assert.strictEqual(process.platform, 'linux');//for wsl
   // });
-    for (let i = 0; i < WSLPassTests.length; i++) {
+  for (let i = 0; i < WSLPassTests.length; i++) {
     const [inputWinPath, expectedMntPath, wslPassTestIndex] = WSLPassTests[i];
     it(`WSLPassTests MJS ${wslPassTestIndex}`, function () {
       // console.log(wslPassTestIndex,inputWinPath);
@@ -117,7 +124,13 @@ describe("linux Factory",function() {
     // });
     it(`WSLPassTests linux ${wslPassTestIndex}`, function(){
       //   // console.log(wslPassTestIndex,inputWinPath);
-      assertW2Wb(inputWinPath,expectedMntPath);
+      if(/^['"]/.test(inputWinPath)){
+        assertW2Wb(inputWinPath,expectedMntPath);
+
+      }else{
+        //linux is interesting... maybe i should put this inside of the index.js?
+        assertW2Wb(inputWinPath.replace(/\\/g,"\\\\"),expectedMntPath);
+      }
     });
   }
 });

@@ -11,7 +11,9 @@ inPathWin32.replace(/\\/g,"/");
 pnpm run test:unit
 pnpm run build-bins
 
+mocha --recursive --timeout 10000 --exit tests/unit
 mocha --recursive --timeout 10000 --exit tests/cli/wsl/wsl-cli-to-wsl.test.mjs
+npx mocha --recursive --timeout 10000 --exit tests/cli/wsl/wsl-cli-to-wsl.test.mjs
 
 ```
 
