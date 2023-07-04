@@ -3,10 +3,18 @@
  */
 // Utilities
 import { defineConfig } from 'vite'
+
 import { fileURLToPath, URL } from 'node:url'
 // import { resolve } from 'node:path'
 // https://vitejs.dev/config/
-export default defineConfig({
+/**
+ * @typedef {import('vite').UserConfigExport} UserConfigExport
+ */
+/**
+ * @type {UserConfigExport}
+ */
+export const viteBaseConfig = (()=>{
+  return {
   define: { 'process.env': {} },
   resolve: {
     alias: {
@@ -31,11 +39,16 @@ export default defineConfig({
     outDir: fileURLToPath(new URL('./lib/dist/', import.meta.url)),
     lib: {
       name: 'nuxt3-win32-posix-path',
-      formats: ['es', 'cjs','umd'],//('es' | 'cjs' | 'umd' | 'iife')
+      // formats: ['es', 'cjs','umd'],//('es' | 'cjs' | 'umd' | 'iife')
+      formats: ['es', 'cjs'],//('es' | 'cjs' | 'umd' | 'iife')
       //i lost my jsdocs though... weird
       entry: [ //"entry" can be a dictionary or array of multiple entry points
         fileURLToPath(new URL('./src/index.mjs', import.meta.url)),
-        // fileURLToPath(new URL('./dev/node-fs-utils-dev/create-dummy-files.mjs', import.meta.url)),
+        // fileURLToPath(new URL('./src/win32ToWin32WSL/win32ToWin32WSL2.mjs', import.meta.url)),
+        // fileURLToPath(new URL('./temp/toWsl.mjs', import.meta.url)),
+        // fileURLToPath(new URL('./src/cli/index.mjs', import.meta.url)),
+        // fileURLToPath(new URL('./dev/node-fs-utils-dev/create-dummy-files.mjs
+        // ', import.meta.url)),
         // fileURLToPath(new URL('./src/win32ToWin32WSL2.mjs', import.meta.url)),
         // fileURLToPath(new URL('./src/import-material-theme-pup.mjs', import.meta.url)),
         // resolve('src/import-theme-chrome-pup.mjs'),
@@ -59,4 +72,8 @@ export default defineConfig({
     },
   },
 
-})
+}})();
+export const rootFilePath = fileURLToPath(new URL('./', import.meta.url));
+/** @type {string|URL} */
+export const rootFileUrl = import.meta.url;
+export default defineConfig(viteBaseConfig)

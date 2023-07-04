@@ -11,23 +11,26 @@ import { spawn } from 'node:child_process'
 import {stdout,stderr} from 'node:process'
 
 /** might be better just to use buffer like they are */
-export function spawnExecCmd(cmd,...args){
+export function spawnExecCmd(cmd,args=[],opts={}){
+  const actual = {shell:true,...opts}
   return new Promise((resolve, reject) => {
     let code, stdouts = [], stderrs = [], signal;
 
-    let spawnCmd = spawn(cmd,[],{shell:true});
+    // let spawnCmd = spawn(cmd,[],{shell:true});
+    let spawnCmd = spawn(cmd,args,actual);
 
     //i think on error need to double check
     spawnCmd.on('error',(err)=>{
       reject(err);
     });
+    spawnCmd.stdout.pipe(stdout);//works
     spawnCmd.stdout.on('data', (data) => {
       // console.log(`stdout: ${data}`);
       stdouts.push(data);
     });
-    spawnCmd.stdout.pipe(stdout);//works
     /* doesnt work pipe on chai, but two on's work n*/
 
+    spawnCmd.stderr.pipe(stderr)
     spawnCmd.stderr.on('data', (data) => {
       // console.error(`stderr: ${data}`);
       stderrs.push(data);
