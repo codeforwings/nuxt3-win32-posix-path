@@ -6,6 +6,15 @@
 inPathWin32.replace(/\\/g,"/");
 ```
 
+## Binary Test Strategy
+```bash
+pnpm run test:unit
+pnpm run build-bins
+
+mocha --recursive --timeout 10000 --exit tests/cli/wsl/wsl-cli-to-wsl.test.mjs
+
+```
+
 ## Next Steps
 * Migrate UI to VitePress
 * Cleanup and move to src/ and test/ etc.
