@@ -47,3 +47,15 @@ ls env:
 
 # using pkg to export the exe
 * for cross platform url util?
+
+
+# also program files
+```powershell
+c:/progra~1/
+c:/progra~2/
+c:/progra~3/
+#3 is program data
+$env:PUBLIC
+%PUBLIC%
+ #>
+```
