@@ -51,11 +51,16 @@ ls env:
 
 # also program files
 ```powershell
+<#
 c:/progra~1/
 c:/progra~2/
 c:/progra~3/
 #3 is program data
 $env:PUBLIC
 %PUBLIC%
+"/cygdrive/c/"
+
  #>
 ```
+* node uses CMD envs...
+* note use process.env
