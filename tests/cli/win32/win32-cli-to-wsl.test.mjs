@@ -1,4 +1,8 @@
 /**
+ * Very slow with wsl invoke
+ */
+
+/**
  yarn add mocha -D
 
  package.json
@@ -23,7 +27,6 @@
 
 
  */
-import {WSLPassTests} from "##/lib/test-utils/ConstPathTests.mjs";
 // import { createRequire } from 'module';
 // const require = createRequire(import.meta.url);
 // const assert = require('assert');
@@ -67,6 +70,7 @@ this.timeout(500);//500ms
 import fs from 'node:fs';
 // import {win32ToWin32WSL2} from "##/dev/win-to-wsl/win32ToWin32WSL2.mjs";
 import {win32ToWin32Slash, win32ToWin32WSL2} from "##/src/win32ToWin32WSL/win32ToWin32WSL2.mjs";//fixme check the import subpath in package.json in other branch
+import {WSLPassTests} from "##/tests/unit/win32ToWin32WSL2.test.mjs";
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
   const filePath = `temp/${sFileName}`
@@ -114,24 +118,24 @@ describe('win32ToWin32WSL2.test.mjs', function(){
     assert.strictEqual(actual,expectedOutput);
   });
   /* try with network mount add \\ path to check real quick */
-  // it("pwsh spaces", function(){
-  //   let input,expected,actual;
-  //   input = "C:\\Users\\Public\\temp spaces\\a\\b c\\d";//apparently pwsh can cd into this
-  //   assert.ok(fs.existsSync(input));
-  //   expected = "c:/Users/Public/temp\ spaces/a/b\ c/d";//will work with quotes
-  //   assert.ok(fs.existsSync(expected));//works with fs, but not with pwsh
-  //   // actual = win32ToWin32Slash(input);
-  //   // assert.strictEqual(actual,expected);
-  //
-  //   // expected = "'c:/Users/Public/temp spaces/a/b c/d'";//single quotes, dont escape
-  //   expected = "c:/Users/Public/temp` spaces/a/b` c/d";//backtick escape added
-  //   //double quotes need escape. but pwsh is backtick `
-  //   actual = win32ToWin32Slash(input);
-  //   // assert.ok(fs.existsSync(expected));
-  //   assert.strictEqual(actual,expected);
-  //
-  //
-  // });
+  it("pwsh spaces", function(){
+    let input,expected,actual;
+    input = "C:\\Users\\Public\\temp spaces\\a\\b c\\d";//apparently pwsh can cd into this
+    assert.ok(fs.existsSync(input));
+    expected = "c:/Users/Public/temp\ spaces/a/b\ c/d";//will work with quotes
+    assert.ok(fs.existsSync(expected));//works with fs, but not with pwsh
+    // actual = win32ToWin32Slash(input);
+    // assert.strictEqual(actual,expected);
+
+    // expected = "'c:/Users/Public/temp spaces/a/b c/d'";//single quotes, dont escape
+    expected = "c:/Users/Public/temp` spaces/a/b` c/d";//backtick escape added
+    //double quotes need escape. but pwsh is backtick `
+    actual = win32ToWin32Slash(input);
+    // assert.ok(fs.existsSync(expected));
+    assert.strictEqual(actual,expected);
+
+
+  });
   /* todo add more unit tests and try quotes and spaces etc.*/
   //todo write down what works...
   //maybe later use try ones with spaces, for not now.
@@ -140,22 +144,47 @@ describe('win32ToWin32WSL2.test.mjs', function(){
 });
 
 
-/**
- * wsl param tests
- *
- */
 
 // writeToFile('WSLPassTests.jsonc',WSLPassTests);
 /**
  * parameterized tests
  */
+import {spawnSync} from "node:child_process";
+import {createMochaCliExe, createMochaCliExeNew} from "##/lib/test-utils/mocha-cli-exec.mjs";
 
 describe('WSLPassTests', function(){
   /* if windows */
-  // if(process.platform !== 'win32'){
-  //   return;
-  // }
- /**/
+  if(process.platform !== 'win32'){
+    return;
+  }
+  /** @type {string|'Win32ToWin32WSL2BinaryPath'} */
+  const W2WB = "lib/bin_build/dist/index-win.exe";
+
+  const assertW2Wb = createMochaCliExe(W2WB);
+  /* raw */
+  it('WSLPassTests mocha exe', function(){
+    const output = spawnSync(
+      // `"${W2WB}" [C:\\` //cmd needs to double quote
+      `"${W2WB}"`,[WSLPassTests[0][0]],{shell:true}
+    );
+    if(output.status !== 0){
+      console.error(output);
+      console.log(output.stdout.toString())
+      console.error(output.stderr.toString())
+      throw new Error("status not 0");
+    }
+    const actual = output.stdout.toString().trim();
+    assert.strictEqual(actual,WSLPassTests[0][1]);
+  });
+  /* wrapper note reversed */
+  it('WSLPassTests assertW2Wb', function(){
+    assertW2Wb(WSLPassTests[0][1],WSLPassTests[0][0]);
+  });
+    /* wrapper note reversed */
+  it('WSLPassTests assertW2Wb - spaces', function(){
+    assertW2Wb(WSLPassTests[1][1],WSLPassTests[1][0]);
+  });
+  /**/
   for (let i = 0; i < WSLPassTests.length; i++) {
     const [inputWinPath, expectedMntPath, wslPassTestIndex] = WSLPassTests[i];
     it(`WSLPassTests MJS ${wslPassTestIndex}`, function () {
@@ -169,7 +198,39 @@ describe('WSLPassTests', function(){
     //   const output = spawnSync(inputWinPath);
     //   assert.strictEqual(actual,expectedMntPath);
     // });
-
+    it(`WSLPassTests exe ${wslPassTestIndex}`, function(){
+      //   // console.log(wslPassTestIndex,inputWinPath);
+      assertW2Wb(expectedMntPath,[inputWinPath]);
+    });
   }
 });
 
+/**
+ * Using debian wsl calling from windows
+ * works but slow 800 ms per call
+ */
+describe("WSL Factory function from windows",function() {
+  const W2WB = "lib/bin_build/dist/index-linux";
+  const assertW2Wb = createMochaCliExeNew('wsl.exe',[ "--distribution Debian --user root -e",W2WB]);
+  // it('test process.platform', function () {
+  //   assert.strictEqual(process.platform, 'linux');//for wsl
+  // });
+    for (let i = 0; i < WSLPassTests.length; i++) {
+    const [inputWinPath, expectedMntPath, wslPassTestIndex] = WSLPassTests[i];
+    it(`WSLPassTests MJS ${wslPassTestIndex}`, function () {
+      // console.log(wslPassTestIndex,inputWinPath);
+      const actual = win32ToWin32WSL2(inputWinPath);
+      assert.strictEqual(actual,expectedMntPath);
+    });
+    /* scrapping ps1 / sh using exe for now */
+    // it(`WSLPassTests ps1 ${wslPassTestIndex}`, function () {
+    //   // console.log(wslPassTestIndex,inputWinPath);
+    //   const output = spawnSync(inputWinPath);
+    //   assert.strictEqual(actual,expectedMntPath);
+    // });
+    it(`WSLPassTests exe ${wslPassTestIndex}`, function(){
+      //   // console.log(wslPassTestIndex,inputWinPath);
+      assertW2Wb(inputWinPath,expectedMntPath);
+    });
+  }
+});

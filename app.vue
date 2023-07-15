@@ -45,6 +45,7 @@
       <textarea class="area"
         :value="sOutputWin32ToSlash"
       />
+<!--    todo cygwin "/cygdrive/c/" to c:/ -->
   </div>
 </template>
 <script>

@@ -17,7 +17,7 @@
     "docs:preview": "vitepress preview docs",
     "build-rollup:vite": "vite build --mode production",
     "build-rollup:pkg": "pkg lib/dist/index.js --out-path lib/dist/bins",
-    "build-bins" : "pnpm run /build-bins:.*/",
+    "build-bins": "pnpm run /build-bins:.*/",
     "build-bins:rollup": "vite build --mode production --config lib/bin_build/bin-vite.config.mjs",
     "build-bins:pkg": "pkg lib/bin_build/.output/index.js --out-path lib/bin_build/dist/"
   },
@@ -25,6 +25,7 @@
     "gh-pages": "^4.0.0",
     "mocha": "^10.2.0",
     "nuxt": "3.0.0",
+    "nyc": "^15.1.0",
     "pkg": "^5.8.1",
     "vite": "^4.3.9",
     "vitepress": "1.0.0-beta.2",
