@@ -2,7 +2,7 @@ import {describe, it} from "mocha";
 import {cwd} from "node:process";
 import {spawnExecCmd} from "##/dev/node-fs-utils-dev/SpawnCmd.mjs";
 import assert from "node:assert";
-
+import {resolve} from "node:path/posix";
 /**
  * Device specific nt machine with cygwin
  */
@@ -40,5 +40,20 @@ describe('spawnCmd-cwd.test.mjs - cygwin', function(){
 
     // out = await spawnExecCmd('where.exe',['pnpm'],{shell:true});
     // assert.match(out.stdout,/^\d+\.\d+\.\d+\n$/);//i.e. 8.6.5
+  });
+  it('parent of filepath exists', async function(){
+    const childFolderInput = '/cygdrive/c/Users/Public/Downloads';
+    const expected = '/cygdrive/c/Users/Public';
+    const actual = resolve(childFolderInput,'..');
+    assert.strictEqual(actual,expected);
+
+  });
+  //works as expected
+  it('parent of filepath dne', async function(){
+    const childFolderInput = '/cygdrive/c/Users/Public/fsdfsdce';
+    const expected = '/cygdrive/c/Users/Public';
+    const actual = resolve(childFolderInput,'..');
+    assert.strictEqual(actual,expected);
+
   });
 });
