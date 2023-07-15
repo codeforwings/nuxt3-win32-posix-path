@@ -1,6 +1,6 @@
 /**
  * https://nodejs.org/api/child_process.html#child_processspawncommand-args-options
- *
+ * og from nuxt3-win32-posix-path/dev/node-fs-utils-dev
  * spawn for executing commands on controller. make it SSH2Pool like?
  * future add support for abort / signal
  *
