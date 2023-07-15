@@ -79,14 +79,18 @@ function writeToFile(fileName,data,space=2){
 import {promisify} from 'node:util';
 import {spawn,spawnSync} from 'node:child_process';
 import {spawnExecCmd} from "##/dev/node-fs-utils-dev/SpawnCmd.mjs";
+import {cwd} from 'node:process';
+function assertEcho(actual,expected){
+      assert.strictEqual(actual.replace(/\r/g,''),expected);
 
+}
 describe('SpawnCmd.test.mjs', function(){
   it('spawnExecCmd', async function(){
     this.timeout(5000);
     let out;
     out = await spawnExecCmd('echo hi',[],{shell:true});
     // console.log(out);
-    assert.strictEqual(out.stdout,'hi\n');
+    assertEcho(out.stdout,'hi\n');
   });
   it('spawnSync', async function(){
     this.timeout(5000);
@@ -100,10 +104,17 @@ describe('SpawnCmd.test.mjs', function(){
     // console.log(out);
     //UintArrasy
     // const tmp = new Uint8Array(stdout);
-    assert.strictEqual(hello,'hi\n');
+    assertEcho(hello,'hi\n');
   });
-});
 
+});
+/**
+ * look at
+ * spawnCmd-cwd.test.mjs
+ * for device specific
+ */
+
+//
 describe('SpawnCmd.test.mjs experiments', function(){
   /**
    * doesnt work
