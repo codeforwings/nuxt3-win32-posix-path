@@ -155,7 +155,47 @@ describe('spawncmd empty env', function(){
     };
     //windowsVerbatimArguments: true,//for windows?
     //also it uses COMSPEC... interesting...
-    output = spawnSync(pwsh,['dev/node-fs-utils-dev/tests/dev-specific/generate-env-logs.ps1'],options)
+    // process.env.comspec = "C:\\Windows\\system32\\cmd.exe";//C:\Windows\system32\cmd.exe /d /s /c '"echo hi"'
+    // output = spawnSync("echo",['hi'],{      shell:true,})
+    /* cmd */
+    output = spawnSync(`C:\\Windows\\system32\\cmd.exe`,[`/d /s /c`,"echo hi"],{      shell:false,windowsVerbatimArguments:true,      env:{
+        // "COMSPEC": "C:\\Windows\\system32\\cmd.exe",
+        // "HOMEDRIVE": "C:",
+        // "HOMEPATH": "\\Users\\Jason",
+        // "LOGONSERVER": "\\\\DESKTOP-2FU8K8O",
+        // "PATH": "c:\\progra~1\\PowerShell\\7;C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI;C:\\Program Files (x86)\\OpenSSH\\;C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin;C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\libnvvp;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\windows\\System32\\OpenSSH\\;C:\\Program Files\\PuTTY\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2022.2.0\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C:\\Users\\Jason\\AppData\\Roaming\\nvm;C:\\Program Files\\nodejs;C:\\Program Files\\dotnet\\;C:\\SysinternalsSuite;C:\\Program Files (x86)\\Incredibuild;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\Git\\cmd;C:\\Users\\Public\\bins\\ffmpeg\\bin;C:\\Program Files\\PowerShell\\7\\;C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI;C:\\cygwin64\\bin;C:\\Users\\Jason\\AppData\\Local\\pnpm;C:\\Users\\Jason\\.amplify\\bin;C:\\Users\\Jason\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Jason\\AppData\\Local\\Programs\\GNU Octave\\Octave-6.2.0\\mingw64\\bin\\;C:\\Program Files (x86)\\GitHub CLI\\;C:\\Users\\Jason\\AppData\\Local\\GitHubDesktop\\bin;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\;C:\\Users\\Jason\\AppData\\Roaming\\npm;C:\\Program Files\\Sublime Text 3;C:\\Program Files (x86)\\Nmap;C:\\Users\\Jason\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Jason\\AppData\\Roaming\\nvm;C:\\Program Files\\nodejs;C:\\Users\\Jason\\.dotnet\\tools;C:\\Program Files\\VirtViewer v11.0-256\\bin;C:\\Users\\Jason\\AppData\\Local\\Pandoc\\;C:\\Users\\Jason\\AppData\\Local\\Programs\\Tesseract-OCR;C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI;C:\\Users\\Jason\\AppData\\Roaming\\pypoetry\\venv\\Scripts;",
+        "PATH": "c:\\progra~1\\PowerShell\\7;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\windows\\System32\\OpenSSH\\", //enough for echo cmd...
+        // "NODE_PATH": "C:\\Users\\Jason\\WebstormProjects\\nuxt3-win32-posix-path\\node_modules\\.pnpm\\node_modules",
+        // "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.JS;.WS;.MSC;.CPL",
+        // "PROMPT": "$P$G",
+        // "PSModulePath": "C:\\Users\\Jason\\OneDrive\\Documents\\PowerShell\\Modules;C:\\Program Files\\PowerShell\\Modules;c:\\progra~1\\powershell\\7\\Modules;;%ProgramFiles%\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+        // "SYSTEMDRIVE": "C:",
+        // "SYSTEMROOT": "C:\\Windows",
+        // "TEMP": "C:\\Users\\Jason\\AppData\\Local\\Temp",
+        // "USERDOMAIN": "DESKTOP-2FU8K8O",
+        // "USERNAME": "Jason",
+        // "USERPROFILE": "C:\\Users\\Jason",
+        // "WINDIR": "C:\\Windows"
+
+
+
+
+      },})
+    assert.strictEqual(output.status,0);
+    assert.strictEqual(output.stdout.toString().replace('\r',''),"hi\n");
+    /* pwsh */
+    //windowsVerbatimArguments: true,//for windows? doesnt seem to really do anything
+    output = spawnSync(pwsh,['-Command',"write-host hi"],{      shell:false,windowsVerbatimArguments:true,      env:{
+        "PATH": "c:\\progra~1\\PowerShell\\7;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\windows\\System32\\OpenSSH\\", //enough for echo cmd...
+      },});
+    // console.log(output);
+    // console.log(output.stderr.toString());
+    // console.log(output.stdout.toString());
+    assert.strictEqual(output.status,0);
+    assert.strictEqual(output.stdout.toString().replace('\r',''),"hi\n");
+
+
+    // output = spawnSync(pwsh,['dev/node-fs-utils-dev/tests/dev-specific/generate-env-logs.ps1'],options)
     if(output.status !==0){
       console.error('stderr: ',output.stderr?.toString());
       console.error(output.error)
