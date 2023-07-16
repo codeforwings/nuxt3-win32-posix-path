@@ -86,7 +86,17 @@ function spawnSyncAssert(cmd,args,expected,options={}){
  * i.e. no env variables, no runner. save to project file
  */
 describe('spawncmd empty env', function(){
-    it('spawnSync diff shell - no env',function(){
+  it('try catch lets',function(){
+    let a,b;
+    function getAB(){
+      a = 'a';
+      b = 'b';
+    }
+
+
+  });
+
+  it('spawnSync diff shell - no env',function(){
     const expected = 'hi\n';
     const options = {
       shell:true,

@@ -11,6 +11,13 @@ import { spawn } from 'node:child_process'
 import {stdout,stderr} from 'node:process'
 
 /** might be better just to use buffer like they are */
+/**
+ *
+ * @param cmd
+ * @param args
+ * @param opts - {shell:true} or path... to shell?
+ * @return {Promise<unknown>}
+ */
 export function spawnExecCmd(cmd,args=[],opts={}){
   const actual = {shell:true,...opts}
   return new Promise((resolve, reject) => {

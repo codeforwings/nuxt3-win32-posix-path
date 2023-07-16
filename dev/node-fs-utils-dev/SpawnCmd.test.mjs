@@ -127,3 +127,7 @@ describe('SpawnCmd.test.mjs experiments', function(){
     console.log(out);
   });
 });
+
+/**
+ * env seems to be done in vite-press-docs.git
+ */
