@@ -54,9 +54,12 @@
 // import {win32ToWin32Slash, win32ToWin32WSL2} from "~/src/win32ToWin32WSL2.mjs";
 
 import {posixTests, win32Tests} from "~/lib/nodePathTestExamples.mjs";
+import {pathPosixToWin32, pathWin32ToPosix,win32ToWin32JS,win32ToWin32Slash,win32ToWin32WSL2} from "~/lib/dist/index.mjs";
+
+//## not working for some reason
 // import {posixTests, win32Tests} from "##/lib/nodePathTestExamples.mjs";
 // import {pathPosixToWin32, pathWin32ToPosix,win32ToWin32JS,win32ToWin32Slash,win32ToWin32WSL2} from "##/lib/dist/index.mjs";
-import {pathPosixToWin32, pathWin32ToPosix,win32ToWin32JS,win32ToWin32Slash,win32ToWin32WSL2} from "##/lib/dist/index.mjs";
+// import {pathPosixToWin32, pathWin32ToPosix,win32ToWin32JS,win32ToWin32Slash,win32ToWin32WSL2} from "##/lib/dist/index.mjs";
 export default {
   name:'app',
   mounted(){
@@ -82,7 +85,11 @@ export default {
           [
               "C:\\Users\\Public\\Documents",
               "C:\\\\Users\\\\Public\\\\Documents",
-              "C:\\Users\\Public\\temp spaces\\a\\b c\\d"
+              "C:\\Users\\Public\\temp spaces\\a\\b c\\d",
+              `"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"`,
+              `C:\\progra~1\\PowerShell\\7\\pwsh.exe`,
+              `C:\\cygwin64\\bin\\bash.exe`,
+              `C:\\Windows\\System32\\cmd.exe`
           ].join('\n'),
     }
   },

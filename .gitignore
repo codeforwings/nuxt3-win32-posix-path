@@ -11,3 +11,4 @@ dist
 /docs/.vitepress/dist/
 /dev/win-to-wsl/logs/
 /temp/
+/dev/node-fs-utils-dev/tests/dev-specific/temp/
