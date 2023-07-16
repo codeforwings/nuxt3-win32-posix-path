@@ -1,5 +1,6 @@
 #!/usr/bin/env bash.exe
 # cd /mnt/c/Users/Jason/WebstormProjects/nuxt3-win32-posix-path
+# c:/cygwin64/bin/env.exe
 cd /mnt/c/Users/Jason/WebstormProjects/nuxt3-win32-posix-path
 PROOT="/mnt/c/Users/Jason/WebstormProjects/nuxt3-win32-posix-path"
 NODE="/mnt/c/Users/Jason/AppData/Roaming/nvm/v16.20.1/node.exe"
