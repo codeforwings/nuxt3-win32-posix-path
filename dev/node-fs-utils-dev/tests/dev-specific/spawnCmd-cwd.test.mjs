@@ -116,6 +116,10 @@ describe('spawncmd empty env', function(){
     const out = spawnSync(pwsh,['-c','Get-ChildItem env:'],{shell:true})
     writeToFile('no-env.txt',out.stdout);//this works... lol interesting
   });
+  /**
+   * https://github.com/codeforwings/nuxt3-win32-posix-path/issues/9
+   *
+   */
   it("try pwd no env",function(){
     this.timeout(8000);
     //shell-no-env.raw.json works but .txt doesnt...
@@ -125,7 +129,8 @@ describe('spawncmd empty env', function(){
       shell:false,
       // shell:"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
       // shell:true,
-      env:{
+      env:{},
+      envs:{
         NODE_FIRST_ARG:'shell-no-env',
         PWD:cwd(),
         //defn works when copied in... wonder what was missing
@@ -147,7 +152,7 @@ describe('spawncmd empty env', function(){
         "USERPROFILE": "C:\\Users\\Jason",
         "WINDIR": "C:\\Windows"
       }
-    }
+    };
     output = spawnSync(pwsh,['dev/node-fs-utils-dev/tests/dev-specific/generate-env-logs.ps1'],options)
     if(output.status !==0){
       console.error('stderr: ',output.stderr?.toString());

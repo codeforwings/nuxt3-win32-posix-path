@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="try pwd (no env)_" type="mocha-javascript-test-runner">
+    <node-interpreter>project</node-interpreter>
+    <node-options />
+    <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+    <working-directory>$PROJECT_DIR$</working-directory>
+    <pass-parent-env>false</pass-parent-env>
+    <ui>bdd</ui>
+    <extra-mocha-options />
+    <test-kind>TEST</test-kind>
+    <test-file>$PROJECT_DIR$/dev/node-fs-utils-dev/tests/dev-specific/spawnCmd-cwd.test.mjs</test-file>
+    <test-names>
+      <name value="spawncmd empty env" />
+      <name value="try pwd no env" />
+    </test-names>
+    <method v="2" />
+  </configuration>
+</component>
