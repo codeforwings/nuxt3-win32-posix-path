@@ -77,6 +77,7 @@ describe('spawnCmd-cwd.test.mjs - cygwin', function(){
 
 /**
  * spawnSyncAssert - for testing... maybe export later
+ * todo add factory function / class
  * @param cmd
  * @param args
  * @param expected
@@ -102,6 +103,9 @@ function spawnSyncAssert(cmd,args,expected,options={}){
  */
 
 const pwsh = "c:/progra~1/PowerShell/7/pwsh.exe"
+/**
+ * IT's a windows problem. mac didnt need any envs. or it did it ok. at least with node 18
+ */
 describe('spawncmd empty env', function(){
   it('nodejs dump env',function(done){
     process.env.NODE_FIRST_ARG = 'empty-env-node-dump'
