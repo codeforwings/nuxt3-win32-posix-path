@@ -347,4 +347,14 @@ describe('spawncmd env', function(){
     const output = process.env.PATH;
     writeToFile('PATH.json',JSON.stringify(output.split(Path.delimiter),null,2));
   })
+  it('compare env count',function(){
+    let output,output2,pEnv;
+    let outputKeys,output2Keys,pEnvKeys;
+    let outputLen, output2Len, pEnvLen;
+    pEnv = {...process.env};
+    pEnvKeys = Object.keys(pEnv);
+    pEnvLen = pEnvKeys.length;
+    console.log(pEnvLen);//56, quite a lot
+    writeToFile('pEnv.json',pEnv);
+  });
 });
