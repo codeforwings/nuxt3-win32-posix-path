@@ -82,7 +82,11 @@ export default {
           [
               "C:\\Users\\Public\\Documents",
               "C:\\\\Users\\\\Public\\\\Documents",
-              "C:\\Users\\Public\\temp spaces\\a\\b c\\d"
+              "C:\\Users\\Public\\temp spaces\\a\\b c\\d",
+              `"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"`,
+              `C:\\progra~1\\PowerShell\\7\\pwsh.exe`,
+              `C:\\cygwin64\\bin\\bash.exe`,
+              `C:\\Windows\\System32\\cmd.exe`
           ].join('\n'),
     }
   },

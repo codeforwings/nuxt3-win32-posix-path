@@ -3,6 +3,7 @@ import {cwd} from "node:process";
 import {spawnExecCmd} from "##/dev/node-fs-utils-dev/SpawnCmd.mjs";
 import assert from "node:assert";
 import {resolve} from "node:path/posix";
+import {spawnSync} from "node:child_process";
 /**
  * Device specific nt machine with cygwin
  */
@@ -56,4 +57,49 @@ describe('spawnCmd-cwd.test.mjs - cygwin', function(){
     assert.strictEqual(actual,expected);
 
   });
+});
+
+
+/**
+ * spawnSyncAssert - for testing... maybe export later
+ * @param cmd
+ * @param args
+ * @param expected
+ * @param options
+ * @return {SpawnSyncReturns<Buffer>}
+ */
+function spawnSyncAssert(cmd,args,expected,options={}){
+  const actualOptions = {shell:true,...options};
+  const out = spawnSync(cmd,args,actualOptions)
+  if(out.status !==0){
+    console.error('stderr: ',out.stderr?.toString());
+    console.error(out.error)
+    throw out.error;
+  }
+  const stdout = out.stdout?.toString();
+  assert.strictEqual(stdout,expected)
+  return out;
+
+}
+/**
+ * Empty webstorm runner.
+ * i.e. no env variables, no runner. save to project file
+ */
+describe('spawncmd empty env', function(){
+    it('spawnSync diff shell - no env',function(){
+    const expected = 'hi\n';
+    const options = {
+      shell:true,
+    }
+    const output = spawnSyncAssert('echo',['hi'],expected,options)
+  })
+  it('spawnSync - no env',function(){
+    const expected = 'hi\n';
+    const output = spawnSyncAssert('echo',['hi'],expected)
+  })
+  it('printenv spawnsync - no env',function(){
+    const expected = 'hi\n';
+    const output = spawnSyncAssert('set',[],expected)
+  })
+
 });
