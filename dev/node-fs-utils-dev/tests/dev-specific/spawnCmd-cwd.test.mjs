@@ -126,9 +126,9 @@ describe('spawncmd empty env', function(){
     //
     let output,options;
     options = {
-      shell:false,
+      // shell:false,
       // shell:"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-      // shell:true,
+      shell:true,
       env:{},
       envs:{
         NODE_FIRST_ARG:'shell-no-env',
@@ -153,6 +153,8 @@ describe('spawncmd empty env', function(){
         "WINDIR": "C:\\Windows"
       }
     };
+    //windowsVerbatimArguments: true,//for windows?
+    //also it uses COMSPEC... interesting...
     output = spawnSync(pwsh,['dev/node-fs-utils-dev/tests/dev-specific/generate-env-logs.ps1'],options)
     if(output.status !==0){
       console.error('stderr: ',output.stderr?.toString());
