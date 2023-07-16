@@ -1,1 +1,0 @@
-.area{min-height:100px;min-width:500px}.dark-theme,:root{--bg-color:#333;--text-color:#fff}.light-theme{--bg-color:#fff;--text-color:#000}body,input,textarea{background-color:var(--bg-color);color:var(--text-color)}h1,p{margin-bottom:1rem}button{background-color:var(--bg-color);border:none;color:var(--text-color);cursor:pointer;padding:.5rem 1rem}
