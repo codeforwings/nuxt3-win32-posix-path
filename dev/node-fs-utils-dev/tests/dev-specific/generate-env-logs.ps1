@@ -18,7 +18,7 @@ $parentDir = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
 #
 write-host "$parentDir/temp/$NODE_FIRST_ARG.txt"
 c:/progra~1/PowerShell/7/pwsh.exe -c Get-ChildItem env: > "$parentDir/temp/$NODE_FIRST_ARG.txt"
-node "$parentDir/generate-env.mjs"
-which.exe node.exe
+#node "$parentDir/generate-env.mjs"
+#which.exe node.exe
 node.exe -v
 write-host "$parentDir/generate-env.mjs"

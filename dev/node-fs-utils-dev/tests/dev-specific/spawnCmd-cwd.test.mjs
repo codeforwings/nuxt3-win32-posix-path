@@ -185,14 +185,18 @@ describe('spawncmd empty env', function(){
     assert.strictEqual(output.stdout.toString().replace('\r',''),"hi\n");
     /* pwsh */
     //windowsVerbatimArguments: true,//for windows? doesnt seem to really do anything
-    output = spawnSync(pwsh,['-Command',"write-host hi"],{      shell:false,windowsVerbatimArguments:true,      env:{
+    // output = spawnSync(pwsh,['-Command',"write-host hi"],{      shell:false,windowsVerbatimArguments:true,      env:{
+    // output = spawnSync("C:\\cygwin64\\bin\\printenv.exe",[],{      shell:false,windowsVerbatimArguments:true,      env:{
+    // output = spawnSync("C:\\cygwin64\\bin\\printenv.exe",[],{      shell:false,windowsVerbatimArguments:false,      env:{
+    // output = spawnSync(pwsh,["-Command","ls env:"],{      shell:false,windowsVerbatimArguments:false,      env:{
+    output = spawnSync(pwsh,["-Command","(ls env:PATH).value"],{      shell:false,windowsVerbatimArguments:true,      env:{
         "PATH": "c:\\progra~1\\PowerShell\\7;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\windows\\System32\\OpenSSH\\", //enough for echo cmd...
       },});
     // console.log(output);
-    // console.log(output.stderr.toString());
-    // console.log(output.stdout.toString());
+    console.log(output.stderr.toString());
+    console.log(output.stdout.toString());
     assert.strictEqual(output.status,0);
-    assert.strictEqual(output.stdout.toString().replace('\r',''),"hi\n");
+    // assert.strictEqual(output.stdout.toString().replace('\r',''),"hi\n");
 
 
     // output = spawnSync(pwsh,['dev/node-fs-utils-dev/tests/dev-specific/generate-env-logs.ps1'],options)
@@ -207,6 +211,7 @@ describe('spawncmd empty env', function(){
     // const jsonFile = Path.resolve(__dirname,`temp/pwsh-cli.raw.json`);//doesnt work for some reason todo
     const jsonFile = Path.resolve(__filename,`../temp/pwsh-cli.raw.json`);
     const txtFile = Path.resolve(__filename,`../temp/pwsh-cli.txt`);
+    const ps1File = Path.resolve(__filename,`../generate-env-logs.ps1`);
     if(fs.existsSync(jsonFile)){
       fs.unlinkSync(jsonFile)
     }
@@ -218,8 +223,28 @@ describe('spawncmd empty env', function(){
     const options = {
       // shell:true,
       shell:false,
+      env:{
+        "PATH": "c:\\progra~1\\PowerShell\\7;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\windows\\System32\\OpenSSH\\;C:\\Users\\Jason\\AppData\\Roaming\\nvm\\v16.20.1\\", //enough for echo cmd...
+        "NODE_PATH": "C:\\Users\\Jason\\WebstormProjects\\nuxt3-win32-posix-path\\node_modules\\.pnpm\\node_modules",
+        ...process.env,
+        "NODE_FIRST_ARG":'pwsh-cli',
+      },
+      windowsVerbatimArguments:true,
     }
-    const output = spawnSync(pwsh,['dev/node-fs-utils-dev/tests/dev-specific/generate-env-logs.ps1 -NODE_FIRST_ARG "pwsh-cli"'],options)
+    console.log(process.env);
+    if(!process.env.NODE_FIRST_ARG){
+      process.env.NODE_FIRST_ARG = options.NODE_FIRST_ARG;
+    }
+    if(!process.env.NODE_PATH){
+      process.env.NODE_PATH = options.NODE_PATH;
+    }
+    if(!process.env.PATH){
+      process.env.PATH = options.PATH;
+    }
+    // process.env.NODE_FIRST_ARG = 'pwsh-mocha-cli'
+    // maybe im just calling powershell wrong lol
+    // const output = spawnSync(pwsh,['-File','./dev/node-fs-utils-dev/tests/dev-specific/generate-env-logs.ps1'],options)
+    const output = spawnSync(pwsh,['-File',ps1File],options)
     try{
 
       assert.strictEqual(output.status,0);
@@ -230,6 +255,8 @@ describe('spawncmd empty env', function(){
       /* ENOENT not found */
       throw output.error;
     }
+    console.log(output.stdout.toString());
+    console.log(output.stderr.toString());
     assert.ok(fs.existsSync(jsonFile))
     assert.ok(fs.existsSync(txtFile))
     assert.ok(fs.existsSync("dev/node-fs-utils-dev/tests/dev-specific/temp/pwsh-cli.raw.json"))
