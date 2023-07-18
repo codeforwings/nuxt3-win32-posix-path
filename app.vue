@@ -78,9 +78,9 @@
 //1. ~/lib
 import {posixTests, win32Tests} from "~/lib/nodePathTestExamples.mjs";
 /* from src - dont use until fixed... arg*/
-// import {pathPosixToWin32, pathWin32ToPosix,win32ToWin32JS,win32ToWin32Slash,win32ToWin32WSL2,win32ToCygwin} from "~/src/index.mjs";
+import {pathPosixToWin32, pathWin32ToPosix,win32ToWin32JS,win32ToWin32Slash,win32ToWin32WSL2,win32ToCygwin} from "~/src/index.mjs";
 /* 2.2 from dist... */
-import {pathPosixToWin32, pathWin32ToPosix,win32ToWin32JS,win32ToWin32Slash,win32ToWin32WSL2} from "~/lib/dist/index.mjs";
+// import {pathPosixToWin32, pathWin32ToPosix,win32ToWin32JS,win32ToWin32Slash,win32ToWin32WSL2} from "~/lib/dist/index.mjs";
 
 
 //## not working for some reason
