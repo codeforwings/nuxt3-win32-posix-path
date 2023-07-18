@@ -76,6 +76,13 @@ Build the application for production:
 
 ```bash
 npm run build
+
+
+#    "build-bins": "pnpm run /build-bins:.*/",
+#    "pwsh:ghGenerateAndDeploy": "c:/progra~1/PowerShell/7/pwsh.exe -File lib/deploy/ghPagesDeploy.ps1",
+# didnt work...
+# https://github.com/codeforwings/nuxt3-win32-posix-path/deployments/activity_log?environment=github-pages
+
 ```
 
 Locally preview production build:

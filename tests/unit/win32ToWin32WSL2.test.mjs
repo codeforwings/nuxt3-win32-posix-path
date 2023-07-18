@@ -23,7 +23,7 @@
 
 
  */
-import {WSLPassTests} from "##/lib/test-utils/ConstPathTests.mjs";
+import {CygwinPassTests, WSLPassTests} from "##/lib/test-utils/ConstPathTests.mjs";
 // import { createRequire } from 'module';
 // const require = createRequire(import.meta.url);
 // const assert = require('assert');
@@ -66,7 +66,7 @@ this.timeout(500);//500ms
  */
 import fs from 'node:fs';
 // import {win32ToWin32WSL2} from "##/dev/win-to-wsl/win32ToWin32WSL2.mjs";
-import {win32ToWin32Slash, win32ToWin32WSL2} from "##/src/win32ToWin32WSL/win32ToWin32WSL2.mjs";//fixme check the import subpath in package.json in other branch
+import {win32ToCygwin, win32ToWin32Slash, win32ToWin32WSL2} from "##/src/win32ToWin32WSL/win32ToWin32WSL2.mjs";//fixme check the import subpath in package.json in other branch
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
   const filePath = `temp/${sFileName}`
@@ -78,7 +78,7 @@ function writeToFile(fileName,data,space=2){
 /**
  * To integrate and move with other tests
  */
-
+//todo win32ToMntPath
 describe('win32ToWin32WSL2.test.mjs', function(){
   it('wsl', function(){
     //assert.strictEqual(1,1);//require assert
@@ -173,3 +173,18 @@ describe('WSLPassTests', function(){
   }
 });
 
+describe('CygwinPassTests', function(){
+  /* if windows */
+  // if(process.platform !== 'win32'){
+  //   return;
+  // }
+ /**/
+  for (let i = 0; i < CygwinPassTests.length; i++) {
+    const [inputWinPath, expectedMntPath, wslPassTestIndex] = CygwinPassTests[i];
+    it(`CygwinPassTests MJS ${wslPassTestIndex}`, function () {
+      // console.log(wslPassTestIndex,inputWinPath);
+      const actual = win32ToCygwin(inputWinPath);
+      assert.strictEqual(actual,expectedMntPath);
+    });
+  }
+});
