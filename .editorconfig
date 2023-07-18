@@ -1,0 +1,9 @@
+# just basic ones
+# hope it doesnt completely override
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+
+# need python / others / ps1? maybe should stay as crlf?
