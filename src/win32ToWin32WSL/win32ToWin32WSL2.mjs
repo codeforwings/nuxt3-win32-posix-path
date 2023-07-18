@@ -31,7 +31,8 @@ export function win32ToMntPath(win32Path,mntPrefix='/mnt/',options){
   /* convert Drive letter to /mnt/<lowercase>/ */
   slashPath = slashPath.replace(/^([a-zA-Z]):/,(match,p1)=>{
     // console.log(match);//match is C:
-    return '/mnt/' + p1.toLowerCase();// /mnt/c/... might want to add quote etc.
+    return mntPrefix + p1.toLowerCase();// /mnt/c/... might want to add quote etc.
+    // return '/mnt/' + p1.toLowerCase();// /mnt/c/... might want to add quote etc.
   })
   //trim check for quotes  / validation later
 
@@ -47,6 +48,20 @@ export function win32ToMntPath(win32Path,mntPrefix='/mnt/',options){
 export function win32ToWin32WSL2(win32Path){
   let wsl2Path;
   wsl2Path =  win32ToMntPath(win32Path,'/mnt/')
+  // win32ToMntPath(win32Path,'/mnt/',{spaceEscape:'` '})
+
+  return wsl2Path;
+}
+
+/**
+ * Returns cywin path
+ * @param win32Path {string}
+ * @return {string} - /cygdrive/c/Users/Public/Documents
+ * todo add /usr/bin, pass in options
+ */
+export function win32ToCygwin(win32Path){
+  let wsl2Path;
+  wsl2Path =  win32ToMntPath(win32Path,'/cygdrive/')
   // win32ToMntPath(win32Path,'/mnt/',{spaceEscape:'` '})
 
   return wsl2Path;
