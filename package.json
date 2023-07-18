@@ -49,6 +49,9 @@
     },
     "#docs/*": {
       "default": "./docs/*"
+    },
+    "#vite-src/*": {
+      "default": "./vite-src/*"
     }
   }
 }

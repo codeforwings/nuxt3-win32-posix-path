@@ -4,6 +4,7 @@
  */
 // Utilities
 import { defineConfig } from 'vite'
+console.log('cwd/vite.config.js');
 
 import { fileURLToPath, URL } from 'node:url'
 // import { resolve } from 'node:path'
