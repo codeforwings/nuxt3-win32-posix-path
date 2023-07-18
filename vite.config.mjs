@@ -1,5 +1,6 @@
 /**
  * Apparently this messes with the build....
+ * this might be deprecated to v0.
  */
 // Utilities
 import { defineConfig } from 'vite'

@@ -7,6 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "dev:vite": "vite dev vite-src",
+    "build:vite": "vite build vite-src",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate --config nuxt.config.mjs",
