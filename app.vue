@@ -1,51 +1,59 @@
 <template>
   <div id="app">
-      <!--    sOutputWin32ToPosix />-->
-      <h1>Win32 To Posix</h1>
-      <textarea
+    <!--    sOutputWin32ToPosix />-->
+    <h1>Win32 To Posix</h1>
+    <textarea
         class="area"
         v-model="sInputWin32"
-      />
+    />
 
-      <textarea      class="area"
-          :value="sOutputWin32ToPosix"
-      />
-      <br/>
-      <!--    sOutputPosixToWin32 />-->
-      <h1>Posix to Win32</h1>
-      <textarea      class="area"
-          v-model="sInputPosix"
-      />
+    <textarea      class="area"
+                   :value="sOutputWin32ToPosix"
+    />
+    <br/>
+    <!--    sOutputPosixToWin32 />-->
+    <h1>Posix to Win32</h1>
+    <textarea      class="area"
+                   v-model="sInputPosix"
+    />
 
-      <textarea      class="area"
-          :value="sOutputPosixToWin32"
-      />
+    <textarea      class="area"
+                   :value="sOutputPosixToWin32"
+    />
 
-      <!--    Win32 Normalized />-->
-      <h1>Win32 to Win32JS</h1>
-      <textarea class="area"
-        v-model="sInputWin32Normal"
-      />
-      <textarea class="area"
-        :value="sOutputWin32Normal"
-      />
-      <!--    Win32 wsl />-->
-      <h1>Win32 to Win32 WSL mnt</h1>
-      <textarea class="area"
-        v-model="sWin32ToWsl"
-      />
-      <textarea class="area"
-        :value="sOutputWin32ToWsl"
-      />
-      <!--    Win32 slash />-->
-      <h1>Win32 to Win32 Slash</h1>
-      <textarea class="area"
-        v-model="sWin32ToSlash"
-      />
-      <textarea class="area"
-        :value="sOutputWin32ToSlash"
-      />
-<!--    todo cygwin "/cygdrive/c/" to c:/ -->
+    <!--    Win32 Normalized />-->
+    <h1>Win32 to Win32JS</h1>
+    <textarea class="area"
+              v-model="sInputWin32Normal"
+    />
+    <textarea class="area"
+              :value="sOutputWin32Normal"
+    />
+    <!--    Win32 wsl />-->
+    <h1>Win32 to Win32 WSL mnt</h1>
+    <textarea class="area"
+              v-model="sWin32ToWsl"
+    />
+    <textarea class="area"
+              :value="sOutputWin32ToWsl"
+    />
+    <!--    Win32 slash />-->
+    <h1>Win32 to Win32 Slash</h1>
+    <textarea class="area"
+              v-model="sWin32ToSlash"
+    />
+    <textarea class="area"
+              :value="sOutputWin32ToSlash"
+    />
+    <!--    todo cygwin "/cygdrive/c/" to c:/ -->
+
+    <h1 Links></h1>
+    <div>
+      <a
+          href="https://github.com/codeforwings/nuxt3-win32-posix-path"
+          target="_blank"
+      >github repo</a>
+    </div>
   </div>
 </template>
 <script>
@@ -72,24 +80,24 @@ export default {
 
       //i believe this is the win32js
       sInputWin32Normal:          [
-              "C:\\Users\\Public\\Documents",
-              "C:\\\\Users\\\\Public\\\\Documents",
-              "C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
-          ].join('\n'),
+        "C:\\Users\\Public\\Documents",
+        "C:\\\\Users\\\\Public\\\\Documents",
+        "C:\\Users\\Jason\\OneDrive\\Documents\\2022\\someMD.md",
+      ].join('\n'),
       /* */
       sWin32ToWsl:          [
-              "C:\\Users\\Public\\Documents",
-              "C:\\\\Users\\\\Public\\\\Documents",
-          ].join('\n'),
+        "C:\\Users\\Public\\Documents",
+        "C:\\\\Users\\\\Public\\\\Documents",
+      ].join('\n'),
       sWin32ToSlash:
           [
-              "C:\\Users\\Public\\Documents",
-              "C:\\\\Users\\\\Public\\\\Documents",
-              "C:\\Users\\Public\\temp spaces\\a\\b c\\d",
-              `"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"`,
-              `C:\\progra~1\\PowerShell\\7\\pwsh.exe`,
-              `C:\\cygwin64\\bin\\bash.exe`,
-              `C:\\Windows\\System32\\cmd.exe`
+            "C:\\Users\\Public\\Documents",
+            "C:\\\\Users\\\\Public\\\\Documents",
+            "C:\\Users\\Public\\temp spaces\\a\\b c\\d",
+            `"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"`,
+            `C:\\progra~1\\PowerShell\\7\\pwsh.exe`,
+            `C:\\cygwin64\\bin\\bash.exe`,
+            `C:\\Windows\\System32\\cmd.exe`
           ].join('\n'),
     }
   },
@@ -128,9 +136,9 @@ export default {
 <!--dark-theme css -->
 <style>
 .area {
-    min-height: 100px;
-    min-width: 500px;
-  }
+  min-height: 100px;
+  min-width: 500px;
+}
 
 
 :root {
