@@ -27,7 +27,8 @@ if($pwd -notmatch "nuxt3-win32-posix-path"){
   $pwd
   exit
 }
-# 2. verify node / maybe pnpm
+# 2. verify node / maybe pnpm - if needed
+# fixme. that doesnt sound right for this project... only nuxt3
 $isNod316=node -v | Select-String -Pattern "v16" -Quiet
 if(!$isNod316){
   Write-Host "node version 16 required"
