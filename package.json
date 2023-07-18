@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-win32-posix-path",
-  "version": "v0.0.1",
+  "version": "v0.1.0",
   "author": "hychan48",
   "description": "nuxt3-win32-posix-path",
   "keywords": ["path", "win32", "posix", "wsl","wsl2","cygwin","nt","vite-build-binaries"],
