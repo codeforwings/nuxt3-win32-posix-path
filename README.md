@@ -40,6 +40,19 @@ lib/bin_build/dist/index-linux ssdf
 ---
 # Nuxt 3 Minimal Starter
 
+## pnpm
+```powershell
+cd $env:Public/Documents/WebstormProejcts
+pnpm dlx nuxi@latest init nuxt3-win32-posix-path
+pnpm dlx nuxi@latest init vite-win32-posix-path
+```
+
+## debug
+```powershell
+# might be easier like this...
+pnpm create vite vite-src --template vue
+
+```
 
 
 
