@@ -12,6 +12,8 @@
     />
     <br/>
     <!--    sOutputPosixToWin32 />-->
+<!--    should be never used-->
+    <div v-if="1===12">
     <h1>Posix to Win32</h1>
     <textarea      class="area"
                    v-model="sInputPosix"
@@ -20,8 +22,8 @@
     <textarea      class="area"
                    :value="sOutputPosixToWin32"
     />
-
-    <!--    Win32 Normalized />-->
+    </div>
+    <!--    Win32 Normalized / JS />-->
     <h1>Win32 to Win32JS</h1>
     <textarea class="area"
               v-model="sInputWin32Normal"
@@ -29,7 +31,9 @@
     <textarea class="area"
               :value="sOutputWin32Normal"
     />
-    <!--    Win32 wsl />-->
+    <!--    Win32 wsl - todo make this append / cydrive?
+    https://github.com/codeforwings/nuxt3-win32-posix-path/issues/3
+    />-->
     <h1>Win32 to Win32 WSL mnt</h1>
     <textarea class="area"
               v-model="sWin32ToWsl"
@@ -37,7 +41,9 @@
     <textarea class="area"
               :value="sOutputWin32ToWsl"
     />
-    <!--    Win32 slash />-->
+    <!--    Win32 slash todo make this toggle space with quotes
+    https://github.com/codeforwings/nuxt3-win32-posix-path/issues/3
+     />-->
     <h1>Win32 to Win32 Slash</h1>
     <textarea class="area"
               v-model="sWin32ToSlash"
