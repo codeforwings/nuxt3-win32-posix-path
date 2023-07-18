@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <!--    sOutputWin32ToPosix />-->
+<!--    Raaw commands are rarely ever used .... revisit later-->
+    <div v-if="1===12">
     <h1>Win32 To Posix</h1>
     <textarea
         class="area"
@@ -12,8 +14,6 @@
     />
     <br/>
     <!--    sOutputPosixToWin32 />-->
-<!--    should be never used-->
-    <div v-if="1===12">
     <h1>Posix to Win32</h1>
     <textarea      class="area"
                    v-model="sInputPosix"
