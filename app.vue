@@ -13,7 +13,8 @@
                    :value="sOutputWin32ToPosix"
     />
     <br/>
-    <!--    sOutputPosixToWin32 />-->
+    </div>
+    <!--    sOutputPosixToWin32 , todo auto fix sep etx.../>-->
     <h1>Posix to Win32</h1>
     <textarea      class="area"
                    v-model="sInputPosix"
@@ -22,7 +23,6 @@
     <textarea      class="area"
                    :value="sOutputPosixToWin32"
     />
-    </div>
     <!--    Win32 Normalized / JS />-->
     <h1>Win32 to Win32JS</h1>
     <textarea class="area"
@@ -35,6 +35,7 @@
     https://github.com/codeforwings/nuxt3-win32-posix-path/issues/3
     />-->
     <h1>Win32 to Win32 WSL mnt</h1>
+    <!--    todo cygwin "/cygdrive/c/" to c:/ -->
     <textarea class="area"
               v-model="sWin32ToWsl"
     />
@@ -51,7 +52,6 @@
     <textarea class="area"
               :value="sOutputWin32ToSlash"
     />
-    <!--    todo cygwin "/cygdrive/c/" to c:/ -->
 
     <h1 Links></h1>
     <div>

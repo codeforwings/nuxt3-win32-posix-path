@@ -78,7 +78,7 @@ function writeToFile(fileName,data,space=2){
 /**
  * To integrate and move with other tests
  */
-
+//todo win32ToMntPath
 describe('win32ToWin32WSL2.test.mjs', function(){
   it('wsl', function(){
     //assert.strictEqual(1,1);//require assert
