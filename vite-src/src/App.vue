@@ -1,3 +1,4 @@
+<!--old options way from old template-->
 <template>
   <div id="app">
     <!--    sOutputWin32ToPosix />-->
@@ -171,13 +172,13 @@ export default {
 }
 </script>
 <!--dark-theme css -->
-<style>
+<style scoped>
 .area {
   min-height: 100px;
   min-width: 500px;
 }
 
-
+/*
 :root {
   --bg-color: #333;
   --text-color: white;
@@ -209,4 +210,5 @@ button {
   border: none;
   cursor: pointer;
 }
+ */
 </style>
