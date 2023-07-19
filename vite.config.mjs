@@ -1,8 +1,11 @@
 /**
  * Apparently this messes with the build....
+ * this might be deprecated to v0.
+ * todo document / fix the build-rollup:vite / :pkg
  */
 // Utilities
 import { defineConfig } from 'vite'
+console.log('cwd/vite.config.js');
 
 import { fileURLToPath, URL } from 'node:url'
 // import { resolve } from 'node:path'
