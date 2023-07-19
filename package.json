@@ -4,7 +4,16 @@
   "author": "hychan48",
   "type": "module",
   "description": "nuxt3-win32-posix-path",
-  "keywords": ["path", "win32", "posix", "wsl","wsl2","cygwin","nt","vite-build-binaries"],
+  "keywords": [
+    "path",
+    "win32",
+    "posix",
+    "wsl",
+    "wsl2",
+    "cygwin",
+    "nt",
+    "vite-build-binaries"
+  ],
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -28,6 +37,7 @@
     "nyc": "^15.1.0",
     "pkg": "^5.8.1",
     "vite": "^4.3.9",
+    "vite-plugin-pwa": "^0.16.4",
     "vitepress": "1.0.0-beta.2",
     "vitepress-plugin-auto-sidebar": "^1.1.0",
     "vue": "^3.3.4"

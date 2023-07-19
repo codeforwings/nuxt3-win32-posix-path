@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import {fileURLToPath, URL} from "node:url";
+import { VitePWA } from 'vite-plugin-pwa'
 
 //might need dotenv for the it to work ... todo
 /**
@@ -20,14 +21,22 @@ console.log('vite-src/vite.config.js: ',process.env.VITE_SOME_KEY);//difference?
 // console.log('vite-src/vite.config.js: ',import.meta.env.VITE_SOME_KEY);//difference?
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    /* https://vite-pwa-org.netlify.app/guide/ */
+    VitePWA({ registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      }
+    })
+  ],
   server:{
     fs:{
       allow: ['..']
     },
   },
   base:"/nuxt3-win32-posix-path/",
-    resolve: {
+  resolve: {
     //im assuming root package.json?
     alias: {
       // https://vitejs.dev/config/shared-options.html#resolve-alias
