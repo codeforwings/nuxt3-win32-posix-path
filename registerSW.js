@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/nuxt3-win32-posix-path/sw.js', { scope: '/nuxt3-win32-posix-path/' })})}
