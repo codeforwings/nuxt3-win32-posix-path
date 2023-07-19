@@ -12,9 +12,9 @@ pnpm run test:unit
 pnpm run build-bins
 
 mocha --recursive --timeout 10000 --exit tests/unit
-mocha --recursive --timeout 10000 --exit tests/cli/wsl/wsl-cli-to-wsl.test.mjs
-npx mocha --recursive --timeout 10000 --exit tests/cli/wsl/wsl-cli-to-wsl.test.mjs
-
+mocha --recursive --timeout 10000 -cursive --timeout 10000 --exit tests/cli/wsl/wsl-cli-to-wsl.test.mjs
+-exit tests/cli/wsl/wsl-cli-to-wsl.test.mjs
+npx mocha --re
 lib/bin_build/dist/index-linux ssdf
 ```
 

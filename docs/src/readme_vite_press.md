@@ -2,6 +2,10 @@
 1. Need to use vscode / webstorm to inject the header or w/e
     * i think there is also called a snippet / wrapper / file template
 
+* docusauurus looks much better
+* https://docusaurus.io/docs/markdown-features/tabs
+* might switch to react...
+
 
 ## Install
 ```bash

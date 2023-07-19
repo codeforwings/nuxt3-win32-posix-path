@@ -1,6 +1,7 @@
 {
   "name": "vite-src",
   "private": true,
+  "description": "is this package.json even required?",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
