@@ -10,17 +10,8 @@
   "scripts": {
     "dev:vite": "vite dev vite-src --base /nuxt3-win32-posix-path/",
     "build:vite": "vite build vite-src",
-    "deploy:vite:gh": "gh-pages --dotfiles --dist dist",
-    "build": "nuxt build -- NOT NUXT3 anymore / temp",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate --config nuxt.config.mjs",
-    "pwsh:generate:gh": "set NUXT_APP_BASE_URL=\"/nuxt3-win32-posix-path/\" && nuxt generate --config nuxt.config.mjs --no",
-    "gh-pages-deploy": "gh-pages --dotfiles --dist dist",
-    "preview": "nuxt preview",
-    "_postinstall": "nuxt prepare",
+    "deploy:vite:gh": "gh-pages --dotfiles --dist vite-src/dist",
     "test:unit": "mocha --recursive --timeout 10000 --exit --ui bdd tests/unit/",
-    "testPathSep:os": "node tests/concepts/printSep.dev.mjs",
-    "ghGenerateAndDeploy": "node lib/deploy/ghPagesDeploy.mjs",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
@@ -28,9 +19,7 @@
     "build-rollup:pkg": "pkg lib/dist/index.js --out-path lib/dist/bins",
     "build-bins": "pnpm run /build-bins:.*/",
     "build-bins:rollup": "vite build --mode production --config lib/bin_build/bin-vite.config.mjs",
-    "build-bins:pkg": "pkg lib/bin_build/.output/index.js --out-path lib/bin_build/dist/",
-    "pwsh:todo": "try script-shell",
-    "pwsh:ghGenerateAndDeploy": "c:/progra~1/PowerShell/7/pwsh.exe -File lib/deploy/ghPagesDeploy.ps1"
+    "build-bins:pkg": "pkg lib/bin_build/.output/index.js --out-path lib/bin_build/dist/"
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
