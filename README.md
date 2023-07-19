@@ -6,6 +6,13 @@
 inPathWin32.replace(/\\/g,"/");
 ```
 
+## Tailwind
+* [play-cdn](https://tailwindcss.com/docs/installation/play-cdn)
+
+
+
+
+
 ## Binary Test Strategy
 ```bash
 pnpm run test:unit
