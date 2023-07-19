@@ -14,6 +14,8 @@ console.log('vite-src/vite.config.js');
 // console.log('vite-src/vite.config.js: ',import.meta.env.BASE_URL);//difference? crashed even as mjs
 console.log('vite-src/vite.config.js: ',process.env.BASE_URL);//difference?
 console.log('vite-src/vite.config.js: ',process.env.VITE_SOME_KEY);//difference?
+//need to loadEnv, then change this to a function
+//https://vitejs.dev/config/
 // console.log('vite-src/vite.config.js: ',import.meta.env.MODE);//difference?
 // console.log('vite-src/vite.config.js: ',import.meta.env.VITE_SOME_KEY);//difference?
 // https://vitejs.dev/config/
