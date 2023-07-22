@@ -26,7 +26,7 @@ export default defineConfig({
     /* https://vite-pwa-org.netlify.app/guide/ */
     VitePWA({ registerType: 'autoUpdate',
       devOptions: {
-        enabled: true
+        // enabled: true
       }
     })
   ],
