@@ -6,6 +6,14 @@
 inPathWin32.replace(/\\/g,"/");
 ```
 
+## Cygwin
+```bash
+# look into
+cygpath
+cygcheck               cygpath                cygrunsrv              cygserver-config       cygstart               cygwin-console-helper
+```
+
+
 ## Binary Test Strategy
 ```bash
 pnpm run test:unit
