@@ -31,7 +31,7 @@
   * probably show in the center of default monitor
 
 ## monitor
-* PiP, brightness, on/off, etc.
+* PnP, brightness, on/off, etc.
 
 ## System File / Folder Navigation`
 * global
