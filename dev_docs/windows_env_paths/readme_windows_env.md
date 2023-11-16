@@ -64,3 +64,133 @@ $env:PUBLIC
 ```
 * node uses CMD envs...
 * note use process.env
+
+
+
+# https://sidd.io/2023/01/github-copilot-self-signed-cert-issue/
+# PAC
+# Docker Fedora install powershell
+```bash
+docker image ls
+docker run -it --rm bookworm:latest
+
+docker run -it --rm --hostname deb-network deb-network 
+```
+
+# Powershell ExpExperiemtn
+```bash
+# https://learn.microsoft.com/en-us/powershell/scripting/install/install-debian?view=powershell-7.3
+# only debian 10 or 11...
+# fedora?
+docker run -it --rm --hostname deb11 --name deb11 debian:11
+
+###################################
+# Prerequisites
+
+# Update the list of packages
+sudo apt-get update
+
+# Install pre-requisite packages.
+sudo apt-get install -y wget
+
+# Get the version of Debian
+source /etc/os-release
+
+# Download the Microsoft repository GPG keys
+wget -q https://packages.microsoft.com/config/debian/$VERSION_ID/packages-microsoft-prod.deb
+
+# Register the Microsoft repository GPG keys
+sudo dpkg -i packages-microsoft-prod.deb
+
+# Delete the the Microsoft repository GPG keys file
+rm packages-microsoft-prod.deb
+
+# Update the list of packages after we added packages.microsoft.com
+sudo apt-get update
+
+###################################
+# Install PowerShell
+sudo apt-get install -y powershell
+
+# Start PowerShell
+pwsh
+Get-ChildItem Env:
+printenv
+
+[Environment]::GetEnvironmentVariable('Foo', 'Machine')
+[Environment]::SetEnvironmentVariable('Foo', 'Bar', 'Machine')
+[Environment]::SetEnvironmentVariable('Foo', '', 'Machine')
+
+# doesnt work... as expected though
+```
+
+```powershell
+# very slow script for some reason. also double appends ';'
+$pathsToAdd = @(
+   'C:\cygwin64\bin',
+)
+# loop for user or machine
+$existingPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+[Environment]::GetEnvironmentVariable('Path', 'User')
+
+
+# download would be iwc
+$ogPref=$ProgressPreference # default is Continue
+$ProgressPreference = 'SilentlyContinue'    # hide iwr progress bar
+Invoke-WebRequest -Uri 'https://cygwin.com/setup-x86_64.exe' -OutFile 'C:\cygwin64\setup-x86_64.exe'
+$ProgressPreference = 'Continue'            # Subsequent calls do display UI.
+$ProgressPreference = $ogPref            # Subsequent calls do display UI.
+[Environment]::GetEnvironmentVariable('NODE_EXTRA_CA_CERTS', 'Machine') # needs admin
+[Environment]::SetEnvironmentVariable('NODE_EXTRA_CA_CERTS', '','Machine')
+
+
+[Environment]::GetEnvironmentVariable('NODE_EXTRA_CA_CERTS', 'User')
+[Environment]::SetEnvironmentVariable('NODE_EXTRA_CA_CERTS', '','User')
+
+
+#$existingPath = [Environment]::GetEnvironmentVariable('Path', 'Machine')
+$currentPaths = $existingPath.Split(';')
+
+foreach ($pathToAdd in $pathsToAdd) {
+    if (-not $currentPaths.Contains($pathToAdd)) {
+        $currentPaths += $pathToAdd
+    }
+}
+
+$newPath = $currentPaths -join ';'
+[Environment]::SetEnvironmentVariable('Path', $newPath, 'User')
+#[Environment]::SetEnvironmentVariable('Path', $newPath, 'Machine')
+
+# merge latter. powershell params are too annoying
+# loop for user
+<#
+[Environment]::GetEnvironmentVariable('Path', 'User')
+#>
+```
+
+# Docker windows 2022
+```powershell
+
+```
+
+# 
+```powershell
+# if machine env NODE_EXTRA_CA_CERTS Completed
+# user env doesnt require admin
+if (-not [Environment]::GetEnvironmentVariable('NODE_EXTRA_CA_CERTS', 'User')) {
+    # mkdir -p C:/ProgramData/AMD/CA_Certs/
+    New-Item -Path 'C:\ProgramData\SOME_CA_Certs' -ItemType Directory -Force
+    # check if SOME_CA.crt exists
+    if (-not (Test-Path 'C:\ProgramData\SOME_CA_Certs\SOME_CA.crt')) {
+        # download SOME_CA.crt
+        $ProgressPreference = 'SilentlyContinue'    # hide iwr progress bar
+        Invoke-WebRequest -Uri 'jasonchan.app/SOME_CA.crt' -OutFile 'C:\ProgramData\SOME_CA_Certs\SOME_CA.crt' # programdata isshared
+        
+    }
+ 
+    [Environment]::SetEnvironmentVariable('NODE_EXTRA_CA_CERTS', 'C:\ProgramData\SOME_CA_Certs\SOME_CA.crt', 'User')
+     
+}
+write-host "NODE_EXTRA_CA_CERTS:"
+[Environment]::GetEnvironmentVariable('NODE_EXTRA_CA_CERTS', 'User')
+```
