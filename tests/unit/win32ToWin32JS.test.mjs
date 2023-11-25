@@ -64,7 +64,7 @@ this.timeout(500);//500ms
  * @param data will automatically be changed
  */
 import fs from 'node:fs';
-import {win32JSToWin32, win32ToWin32JS} from "../../src/win32ToWin32JS.mjs";
+import {replaceProgramFiles, win32JSToWin32, win32ToWin32JS} from "../../src/win32ToWin32JS.mjs";
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
   const filePath = `temp/${sFileName}`
@@ -123,6 +123,7 @@ describe('tests/fixtures/win32JSToWin32.csv', function(){
     const actual = "C:\\\\Users\\\\Public\\\\Documents".replace(/\\\\/g,'/');
     assert.strictEqual(actual,"C:/Users/Public/Documents");
   });
+  //fixme
   it("win32JSToWin32", async function(){
     const csvFilePath = 'tests/fixtures/win32JSToWin32.csv';
 
@@ -139,5 +140,19 @@ describe('tests/fixtures/win32JSToWin32.csv', function(){
       assert.strictEqual(actual,expected);
     })
   })
+});
 
+describe('replaceProgramFiles', function(){
+  it("replaceProgramFiles program files", async function(){
+    assert.strictEqual(replaceProgramFiles('C:\\Program Files\\nodejs\\node.exe'),
+      'C:\\progra~1\\nodejs\\node.exe');
+  })
+  it("replaceProgramFiles program files x86", async function(){
+    assert.strictEqual(replaceProgramFiles('C:\\Program Files\\nodejs\\node.exe'),
+      'C:\\progra~1\\nodejs\\node.exe');
+  })
+  it("replaceProgramFiles program data", async function(){
+    assert.strictEqual(replaceProgramFiles('C:\\Program Data\\ssh'),
+      'C:\\progra~3\\ssh');
+  })
 });
