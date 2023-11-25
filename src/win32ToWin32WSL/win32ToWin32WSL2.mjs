@@ -54,7 +54,9 @@ export function win32ToWin32WSL2(win32Path){
 }
 
 /**
- * Returns cywin path
+ * Returns cygwin path
+ * https://github.com/search?q=repo%3Acygwin%2Fcygwin+cygpath&type=code
+ * can use that instead... and there's also wsl path
  * @param win32Path {string}
  * @return {string} - /cygdrive/c/Users/Public/Documents
  * todo add /usr/bin, pass in options

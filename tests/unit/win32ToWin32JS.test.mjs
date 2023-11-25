@@ -1,28 +1,28 @@
 /**
-yarn add mocha -D
+ yarn add mocha -D
 
-package.json
-  "imports": {
-    "##/*": {
-      "default": "./*"
-    },
-  },
-  "type": "module",
+ package.json
+ "imports": {
+ "##/*": {
+ "default": "./*"
+ },
+ },
+ "type": "module",
 
-  jsconfig.json
-  {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "##/*": ["./*"]
-    }
-  },
-  "exclude": ["node_modules", ".nuxt", "dist"]
-}
+ jsconfig.json
+ {
+ "compilerOptions": {
+ "baseUrl": ".",
+ "paths": {
+ "##/*": ["./*"]
+ }
+ },
+ "exclude": ["node_modules", ".nuxt", "dist"]
+ }
 
 
 
-*/
+ */
 // import { createRequire } from 'module';
 // const require = createRequire(import.meta.url);
 // const assert = require('assert');
@@ -64,10 +64,10 @@ this.timeout(500);//500ms
  * @param data will automatically be changed
  */
 import fs from 'node:fs';
-import {win32ToWin32JS} from "../../src/win32ToWin32JS.mjs";
+import {win32JSToWin32, win32ToWin32JS} from "../../src/win32ToWin32JS.mjs";
 function writeToFile(fileName,data,space=2){
   const sFileName = /\./.test(fileName) ? fileName : fileName + '.json';
-  const filePath = `dev/pbs/test/${sFileName}`
+  const filePath = `temp/${sFileName}`
   fs.writeFileSync(filePath,
     typeof data === 'string' ? data :JSON.stringify(data,null,+space)
   );
@@ -95,5 +95,49 @@ describe('win32ToWin32JS.test.mjs', function(){
     assert.strictEqual(out,'C:\\\\Users\\\\Jason\\\\OneDrive - Code for Wings\\\\rick and morty');
     // console.log(out);
   });
+
+});
+
+/**
+ * pnpm add -d csvtojson
+ */
+import csv from 'csvtojson'
+describe('tests/fixtures/win32JSToWin32.csv', function(){
+  let jsonArray;
+  before(async function(){
+    const csvFilePath = 'tests/fixtures/win32JSToWin32.csv';
+
+    jsonArray = await csv().fromFile(csvFilePath);
+  });
+  it("get file", async function(){
+    const csvFilePath = 'tests/fixtures/win32JSToWin32.csv';
+
+    const jsonArray = await csv().fromFile(csvFilePath);
+    // console.log(jsonArray);
+    writeToFile('win32JSToWin32.json',jsonArray);
+
+    assert.ok(Array.isArray(jsonArray),'jsonArray is not an array');
+
+  });
+  it("hardcoded \\ ", async function(){
+    const actual = "C:\\\\Users\\\\Public\\\\Documents".replace(/\\\\/g,'/');
+    assert.strictEqual(actual,"C:/Users/Public/Documents");
+  });
+  it("win32JSToWin32", async function(){
+    const csvFilePath = 'tests/fixtures/win32JSToWin32.csv';
+
+    const jsonArray = await csv().fromFile(csvFilePath);
+    // console.log(jsonArray);
+    writeToFile('win32JSToWin32.json',jsonArray);
+
+    assert.ok(Array.isArray(jsonArray),'jsonArray is not an array');
+    jsonArray.forEach((row)=>{
+      const {jsPath,winPathSlash,sep} = row;
+      const input = jsPath;
+      const expected = winPathSlash;
+      const actual = win32JSToWin32(input,sep);
+      assert.strictEqual(actual,expected);
+    })
+  })
 
 });

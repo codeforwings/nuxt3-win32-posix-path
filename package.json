@@ -55,5 +55,8 @@
     "#vite-src/*": {
       "default": "./vite-src/*"
     }
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
   }
 }

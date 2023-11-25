@@ -114,3 +114,24 @@ npm run preview
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
+```md
+You're correct, in general it is best practice to avoid using commas in file or directory names and paths across most common operating systems and filesystems. Here are some key reasons why commas should typically be avoided:
+
+- The Windows API and NTFS filesystem do not allow commas in paths when using standard Win32 file handling functions. Commas will cause errors.
+
+- On Linux, ext4 and many other default filesystems do not allow commas despite some more exotic filesystems supporting them.
+
+- Commas are used as delimiters or separators in many programming languages, shells, and formats like CSVs. This can complicate working with paths containing them.
+
+- Many applications and tools are written to assume paths are comma-free and may fail to handle them properly even if the filesystem itself allows them.
+
+- Network file shares using protocols like SMB can transmit commas, but this causes problems for client tools trying to work with such paths locally. 
+
+- Overall, following conventions and avoiding delimiters like commas in naming files maximizes compatibility across OSes, filesystems, protocols, formats, and applications.
+
+So in summary, while some rare exceptions exist, the safe approach is to exclude commas from file and directory names to prevent unnecessary errors, bugs, and edge-case issues in most mainstream environments. Sticking to common path conventions is recommended.
+```
+
+```bash
+mkdir -p temp/
+```
