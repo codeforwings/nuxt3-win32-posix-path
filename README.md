@@ -135,3 +135,8 @@ So in summary, while some rare exceptions exist, the safe approach is to exclude
 ```bash
 mkdir -p temp/
 ```
+
+```powershell
+# this works, but not in explorer or everything
+start c:/progra~1/Git/cmd/
+```
