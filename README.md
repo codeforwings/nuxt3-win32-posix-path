@@ -139,4 +139,7 @@ mkdir -p temp/
 ```powershell
 # this works, but not in explorer or everything
 start c:/progra~1/Git/cmd/
+
+"C:\Program Files\OpenSSH-Win64\sshd.exe"
+"C:\Program Files\OpenSSH-Win64\sshd.exe"
 ```
